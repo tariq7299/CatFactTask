@@ -1,0 +1,15 @@
+@import './../../../_variables.scss';
+
+.section-action-button {
+    padding: 10px;
+    border: black 1px; 
+    border-radius: 10px;
+}
+
+.secondary-font-color {
+    color: $secondary-font-color;
+}
+
+.secondary-color {
+    background-color: $secondary-color;
+}
