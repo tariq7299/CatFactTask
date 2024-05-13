@@ -1,19 +1,25 @@
 const express = require('express');
 const crypto = require('crypto');
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
 
 const users = [
-  { id: 1, username: 'Hassan', password: '1122' },
-  { id: 2, username: 'Tariq', password: '1122' },
+  { id: 1, username: 'hassan', password: '1122' },
+  { id: 2, username: 'tariq', password: '1122' },
 ];
 
-const secretKey = 'your-secret-key';
+const secretKey = 'CAT-FACTS-VERY-SECRET';
 
 app.use(express.json());
+app.use(cors());
 
-app.post('/login', (req, res) => {
+app.get("/", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+
+app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   const user = users.find(
     (u) => u.username === username && u.password === password
@@ -24,15 +30,23 @@ app.post('/login', (req, res) => {
   }
 
   const token = generateToken(user.id);
-  res.json({ token });
+  const userData = {
+    id: user.id,
+    username: user.username,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email,
+  };
+
+  res.json({ token, userData });
 });
 
-// Protected route
-app.get('/protected', authenticateToken, (req, res) => {
+
+app.get('/api/protected', authenticateToken, (req, res) => {
   res.json({ message: 'Access granted' });
 });
 
-// Token generation function
+
 function generateToken(userId) {
   const hash = crypto.createHmac('sha256', secretKey)
     .update(userId.toString())
@@ -40,7 +54,7 @@ function generateToken(userId) {
   return hash;
 }
 
-// Authentication middleware
+
 function authenticateToken(req, res, next) {
   const token = req.headers['x-auth-token'];
 
@@ -59,5 +73,5 @@ function authenticateToken(req, res, next) {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Cat server is runnng on ${PORT}`);
 });
