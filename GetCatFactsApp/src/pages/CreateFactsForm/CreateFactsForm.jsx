@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
+import './CreatFactsForm.scss'
+import MyButton from '../../components/common/MyButton/MyButton';
 
 const CreateFactsForm = ({setNewFactAdded}) => {
 
@@ -54,8 +56,9 @@ const CreateFactsForm = ({setNewFactAdded}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+
+    <form className='add-fact-form' onSubmit={handleSubmit}>
+      <div className='add-fact-form-elements-container'>
         <label htmlFor="inputField">Enter your cat fact</label>
         <input
           type="text"
@@ -64,9 +67,10 @@ const CreateFactsForm = ({setNewFactAdded}) => {
           value={formData.newCatFact}
           onChange={handleInputChange}
         />
+      <MyButton text="Add Fact" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
       </div>
-      <button type="submit">Create Fact</button>
     </form>
+
   );
 };
 

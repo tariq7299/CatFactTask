@@ -19,7 +19,8 @@ const MyDataTable = ({ data }) => {
         fontWeight: 'bold',
         paddingLeft: '0 8px',
         justifyContent: 'center',
-        backgroundColor: '#FFA500'
+        backgroundColor: '#FFA500',
+
       },
     },
   }

@@ -1,0 +1,14 @@
+@import './../../variables';
+
+form.add-fact-form {
+    width: 100%;
+
+    .add-fact-form-elements-container{
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 1rem;
+        justify-content: center;
+
+    }
+}

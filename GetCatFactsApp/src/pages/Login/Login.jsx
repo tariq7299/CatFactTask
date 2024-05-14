@@ -38,7 +38,7 @@ export default function Login() {
         <h1>Wellcome to my Cat Facts WebSite </h1>
         <ResponsiveCat></ResponsiveCat>
         </div>
-        <form onSubmit={handleSubmitEvent}>
+        <form className="login-form" onSubmit={handleSubmitEvent}>
           <div className="form_control">
             <label htmlFor="user-username">Username</label>
             <input

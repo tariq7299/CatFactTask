@@ -30,6 +30,8 @@
 - Add a bootstarap alert that will show a wrong credentials 
 - CHange all fetch() to axios()
 - Try to find a better way to store username
+- Remove vertical overflow
+- 
 
 
 ## logout  

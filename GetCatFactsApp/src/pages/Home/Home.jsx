@@ -112,8 +112,10 @@ function Home() {
                     <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
                 </div>
 
-                <p>Proudly made by TQ</p>
-                <button onClick={handleLogout}>GoodBye</button>
+                <div className='footer'>
+                    <p>Proudly made by TQ</p>
+                    <MyButton buttonColor="secondary-color" textColor="primary-font-color" text='Exit' handleOnClick={handleLogout}>GoodBye</MyButton>
+                </div>
                 
             </div>
         )}
