@@ -113,7 +113,7 @@ function Home() {
 
                 <div className='footer'>
                     <p>Proudly made by TQ</p>
-                    <MyButton buttonColor="secondary-color" textColor="primary-font-color" text='Exit' handleOnClick={handleLogout}>GoodBye</MyButton>
+                    <MyButton buttonColor="secondary-color" textColor="red" text='Exit' handleOnClick={handleLogout}>GoodBye</MyButton>
                 </div>
                 
             </div>

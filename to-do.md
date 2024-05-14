@@ -15,6 +15,7 @@
 - Change all compoenets with bootstrap comnpenets
 - Make the loading be on the table itself and not the whole page
 - Add an emoj or some resposive shit to Hello username 
+- Add emoji to enter your cat fact label
 
 
 
