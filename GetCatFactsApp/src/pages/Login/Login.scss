@@ -1,3 +1,19 @@
+.parent-container{
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100lvh;
+    justify-content: ceneter;
+    align-items: center;
+    .header-container {
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        gap: 4rem;
+        padding: 4rem 1rem;
+    }
+}
+
+
 form {
     padding: 2rem;
 }

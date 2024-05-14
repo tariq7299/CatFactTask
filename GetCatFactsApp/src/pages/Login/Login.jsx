@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/AuthProvider";
-import { Link } from "react-router-dom";
 import "./Login.scss";
+import ResponsiveCat from "../../components/ResponsiveCat/ResponsiveCat";
 
 
 export default function Login() {
@@ -13,7 +13,7 @@ export default function Login() {
       });
       
       const auth = useAuth();
-      
+
       const handleSubmitEvent = (e) => {
         e.preventDefault();
         if (input.username !== "" && input.password !== "") {
@@ -32,7 +32,11 @@ export default function Login() {
       };
     
       return (
-        <>
+        <div className="parent-container">
+        <div className="header-container">
+        <h1>Wellcome to my Cat Facts App </h1>
+        <ResponsiveCat></ResponsiveCat>
+        </div>
         <form onSubmit={handleSubmitEvent}>
           <div className="form_control">
             <label htmlFor="user-username">Username:</label>
@@ -67,6 +71,6 @@ export default function Login() {
           </div>
           <button className="btn-submit">Submit</button>
         </form>
-        </>
+        </div>
       );
     };

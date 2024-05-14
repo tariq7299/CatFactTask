@@ -49,13 +49,23 @@ app.post('/api/login', (req, res) => {
   res.json({ token, userData });
 });
 
-
 function generateToken(userId) {
   const hash = crypto.createHmac('sha256', secretKey)
     .update(userId.toString())
     .digest('hex');
   return hash;
 }
+
+app.get("/api/facts", (req, res) => {
+  
+  try {
+
+    res.status(200).json(usersCatFacts);
+
+  } catch(error) {
+    res.status(500).json({message: error.message})
+  }
+});
 
 app.post('/api/facts/create', authenticateToken, (req, res) => {
 
@@ -119,9 +129,6 @@ function authenticateToken(req, res, next) {
   next();
 }
 
-app.get('/api/protected', authenticateToken, (req, res) => {
-  res.json({ message: 'Access granted' });
-});
 
 
 

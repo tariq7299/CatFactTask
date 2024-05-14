@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 
-const CreateFactsForm = () => {
+const CreateFactsForm = ({setNewFactAdded}) => {
 
     const { getToken } = useAuth() 
 
@@ -47,6 +47,7 @@ const CreateFactsForm = () => {
     setFormData({
       newCatFact: '',
     });
+    setNewFactAdded(true)
 
 
 
