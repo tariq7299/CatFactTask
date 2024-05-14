@@ -8,6 +8,7 @@
 - Write a really good looking README file
 - If you have time try to use useMemo()
 - Add a to do and comment above each to-do line in the code
+- Use prettier to clean code
 
 ## HOME
 - CHange depenecy of useFetch from catFacts to some solid variable and not an object !

@@ -1,9 +1,17 @@
 @import './../../../_variables.scss';
 
 .section-action-button {
-    padding: 10px;
-    border: black 1px; 
-    border-radius: 10px;
+    padding: 0.5rem 3rem;
+    border: black 1px solid; 
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1.5rem;
+
+    &:hover {
+        background-color: $color-black;
+        border-color: $secondary-color;
+        color: $color-white;
+    }
 }
 
 .secondary-font-color {
@@ -13,3 +21,4 @@
 .secondary-color {
     background-color: $secondary-color;
 }
+

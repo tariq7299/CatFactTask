@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/AuthProvider";
 import "./Login.scss";
 import ResponsiveCat from "../../components/ResponsiveCat/ResponsiveCat";
+import MyButton from "../../components/common/MyButton/MyButton";
 
 
 export default function Login() {
@@ -39,37 +40,35 @@ export default function Login() {
         </div>
         <form onSubmit={handleSubmitEvent}>
           <div className="form_control">
-            <label htmlFor="user-username">Username:</label>
+            <label htmlFor="user-username">Username</label>
             <input
               type="text"
               id="user-username"
               name="username"
-              placeholder="Enter your username"
+              placeholder="catman99..."
               aria-describedby="user-username"
               aria-invalid="false"
               autoComplete="current-username"
               onChange={handleInput}
             />
-            <div id="user-username" className="sr-only">
-              Please enter a valid username. It must contain at least 6 characters.
-            </div>
+           
           </div>
           <div className="form_control">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="password"
+              placeholder="1122 (maybe)"
               aria-describedby="user-password"
               aria-invalid="false"
               autoComplete="current-password"
               onChange={handleInput}
             />
-            <div id="user-password" className="sr-only">
-              your password should be more than 6 character
-            </div>
+          
           </div>
-          <button className="btn-submit">Submit</button>
+          <div className="get-started-button-wrapper"></div>
+            <MyButton className="get-started-button" text="Lets Goo!" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
         </form>
         </div>
       );
