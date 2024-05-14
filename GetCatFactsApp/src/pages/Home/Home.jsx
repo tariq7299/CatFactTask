@@ -19,12 +19,45 @@ function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoadingUsersFacts, setIsLoadingUsersFacts] = useState(false);
     const [isLoadingInternetFacts, setIsLoadingInternetFacts] = useState(false)
-    const [isError, setIsError] = useState(false);
+    const [isErrorFetchingInternetCatFacts, setIsErrorFetchingInternetCatFacts] = useState(false);
+    const [isErrorFetchingUsersCatFacts, setIsErrorFetchingUsersCatFacts] = useState(false);
+
+    
+
+    useEffect(() => {
+
+        const fetchInternetCatFacts = async () => {
+            setIsErrorFetchingInternetCatFacts(false);
+            setIsLoadingInternetFacts(true);
+            try {
+                const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
+
+                  // Simulate a delay of 0.6 seconds
+                  setInternetCatFacts(response.data)
+                  const timer = setTimeout(() => {
+                    setIsLoadingInternetFacts(false);
+                }, 600);
+
+                return () => clearTimeout(timer);
+                
+            } catch (error) {
+                setIsErrorFetchingInternetCatFacts(true);
+                console.error('Error fetching data:', error)
+            }
+
+            setIsLoadingInternetFacts(false);
+        
+        };
+
+        fetchInternetCatFacts();
+      
+      
+    }, [currentPage]);
 
     useEffect(() => {
 
         const fetchUsersCatFacts = async () => {
-            setIsError(false);
+            setIsErrorFetchingUsersCatFacts(false);
             setIsLoadingUsersFacts(true);
             try {
                 const response = await axios.get('http://localhost:3000/api/facts');
@@ -42,7 +75,7 @@ function Home() {
                 return () => clearTimeout(timer);
 
             } catch (error) {
-                setIsError(true);
+                setIsErrorFetchingUsersCatFacts(true);
                 console.error('Error fetching data:', error)
             }
 
@@ -53,36 +86,6 @@ function Home() {
         fetchUsersCatFacts();
         setNewFactAdded(false)
     }, [newFactAdded]);
-
-    useEffect(() => {
-
-        const fetchInternetCatFacts = async () => {
-            setIsError(false);
-            setIsLoadingInternetFacts(true);
-            try {
-                const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
-
-                  // Simulate a delay of 0.6 seconds
-                  setInternetCatFacts(response.data)
-                  const timer = setTimeout(() => {
-                    setIsLoadingInternetFacts(false);
-                }, 600);
-
-                return () => clearTimeout(timer);
-                
-            } catch (error) {
-                setIsError(true);
-                console.error('Error fetching data:', error)
-            }
-
-            setIsLoadingInternetFacts(false);
-        
-        };
-
-        fetchInternetCatFacts();
-      
-      
-    }, [currentPage]);
         
 
     const handlePrevPage = () => {
@@ -104,7 +107,7 @@ function Home() {
 
     return (
         <div>
-            {isError && <div>Error fetching Cat Facts !!!</div>}
+           
           
             <div>
 
@@ -116,7 +119,7 @@ function Home() {
 
                         <h1> Here are some Cat facts from the internet</h1>
 
-                        {isLoadingInternetFacts ? (
+                        {isErrorFetchingInternetCatFacts ? <div className='error-message'>Error fetching Internet Cat Facts !!! Please contact support !</div> : isLoadingInternetFacts ? (
                             <div className='progress-bar-container'>     <ProgressBar
                             visible={true}
                             height="80"
@@ -128,20 +131,22 @@ function Home() {
                             wrapperClass=""
                             /></div>
       
-            ) : ( <InternetCatFactsTable internetCatFacts={internetCatFacts.data} />)}
-                       
-                        <div className='pagination-buttons-container'>
+            ) : ( <><InternetCatFactsTable internetCatFacts={internetCatFacts.data} />
+            
+            <div className='pagination-buttons-container'>
                             <MyButton handleOnClick={handleNextPage} isDisabled={!internetCatFacts.next_page_url} text="Previous" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
 
                             <MyButton handleOnClick={handlePrevPage} isDisabled={!internetCatFacts.prev_page_url} text="Next" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
                             
-                        </div>
+                        </div></>)}
+
+                        
                     </div>
                     <div className='users-cat-facts-table-container'>
                         <h1> Here are users cat fact </h1>
 
-                        
-                        {isLoadingUsersFacts ? (
+                   
+                        {isErrorFetchingUsersCatFacts ? <div className='error-message'>Error fetching Users Cat Facts !!! Please contact support !</div> :isLoadingUsersFacts ? (
                             <div className='progress-bar-container'>     <ProgressBar
                             visible={true}
                             height="80"

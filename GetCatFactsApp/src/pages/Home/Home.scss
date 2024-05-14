@@ -12,7 +12,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     padding: 3rem 0rem ;
     gap: 2rem;
 
@@ -70,6 +70,17 @@
 
 
 }
+
+.error-message {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: min(30vh, 300px);
+}
+
 .add-new-fact-container{
     h1 {
         text-align: center;
