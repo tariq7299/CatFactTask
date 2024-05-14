@@ -4,10 +4,13 @@ import MyDataTable from '../../components/MyDataTable/MyDataTable';
 import UsersCatFactsTable from '../../components/UsersCatFactsTable/UsersCatFactsTable';
 import CreateFactsForm from '../CreateFactsForm/CreateFactsForm';
 import { useAuth } from "../../hooks/AuthProvider";
+import './Home.scss'
+import MyButton from "../../components/common/MyButton/MyButton";
 
 function Home() {
 
-    const { logOut } = useAuth()
+    const { logOut, getUserData } = useAuth()
+    const username = getUserData()
 
     const [internetCatFacts, setInternetCatFacts] = useState([]);
     const [usersCatFacts, setUsersCatFacts] = useState([]);
@@ -39,7 +42,8 @@ function Home() {
             setIsError(false);
             setIsLoading(true);
             try {
-                const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}`);
+                const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
+                console.log("response", response)
                 setInternetCatFacts(response.data)
             } catch (error) {
                 setIsError(true);
@@ -57,7 +61,7 @@ function Home() {
     }, [currentPage, newFactAdded]);
 
     const handlePrevPage = () => {
-        if (catFacts.prev_page_url ) {
+        if (internetCatFacts.prev_page_url ) {
             setCurrentPage(currentPage - 1);
         }
     };
@@ -81,21 +85,35 @@ function Home() {
             ) : (
             <div>
 
-            
-                <MyDataTable data={internetCatFacts.data} />
+                <h1 className='greeting-header'>Hello {username} !</h1>
 
-                <button onClick={handlePrevPage} disabled={!internetCatFacts.prev_page_url}>
-                Previous
-                </button>
-                <button onClick={handleNextPage} disabled={!internetCatFacts.next_page_url}>
-                    Next
-                </button>
+                <div className='tables-container'>
 
-                <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
+                    <div className='Internetfacts-table-container'>
 
-                <UsersCatFactsTable data={usersCatFacts} />
+                        <h1> Here are some Cat facts from the internet</h1>
+                        <MyDataTable data={internetCatFacts.data} />
+                        <div className='pagination-buttons-container'>
+                            <MyButton handleOnClick={handleNextPage} isDisabled={!internetCatFacts.next_page_url} text="Previous" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
 
-                <button onClick={handleLogout}>Logout</button>
+                            <MyButton handleOnClick={handlePrevPage} isDisabled={!internetCatFacts.prev_page_url} text="Next" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <h1> Here are users cat facts</h1>
+                        <UsersCatFactsTable data={usersCatFacts} />
+                    </div>
+                </div>
+
+                <h1>You can also add your own facts ! Try it</h1>
+
+                <div>
+                    <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
+                </div>
+
+                <p>Proudly made by TQ</p>
+                <button onClick={handleLogout}>GoodBye</button>
                 
             </div>
         )}

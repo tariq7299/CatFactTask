@@ -13,9 +13,15 @@
 ## HOME
 - CHange depenecy of useFetch from catFacts to some solid variable and not an object !
 - Change all compoenets with bootstrap comnpenets
+- Make the loading be on the table itself and not the whole page
+- Add an emoj or some resposive shit to Hello username 
+
+
 
 ## MyDataTable
 - Change ID field content from lenght to real id  
+
+
 ## login  
 - Try to encrypt localstorage user toke
 - Fix error chunk-YI7ZP7WZ.js?v=fc7ea98c:521 Warning: Cannot update a component (`AuthProvider`) while rendering a different component (`PrivateRoute`). To locate the bad setState() call inside `PrivateRoute`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
@@ -23,6 +29,7 @@
 - Add alert using bootstarp that will show a greeting message
 - Add a bootstarap alert that will show a wrong credentials 
 - CHange all fetch() to axios()
+- Try to find a better way to store username
 
 
 ## logout  

@@ -1,0 +1,25 @@
+
+@import './../../variables';
+
+
+.greeting-header {
+    font-size: 4rem;
+    text-align: center;
+    padding: 2rem 0rem
+}
+
+.tables-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem ;
+    gap: 5rem;
+
+    .Internetfacts-table-container {
+        .pagination-buttons-container {
+            padding: 1rem 0;
+            text-align: center;
+        }
+    }
+}

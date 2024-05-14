@@ -3,13 +3,20 @@ import DataTable from 'react-data-table-component';
 
 const UsersCatFactsTable = ({ data }) => {
 
+  const tableCustomStyles = {
+    headCells: {
+      style: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        paddingLeft: '0 8px',
+        justifyContent: 'center',
+        backgroundColor: '#FFA500'
+      },
+    },
+  }
+  
 
   const columns = [
-    {
-      name: 'ID',
-      selector: row => row.factId,
-      sortable: true,
-    },
     {
       name: 'User',
       selector: row => row.owner,
@@ -28,6 +35,7 @@ const UsersCatFactsTable = ({ data }) => {
       <DataTable
         columns={columns}
         data={data}
+        customStyles={tableCustomStyles}
       />
     )
   }

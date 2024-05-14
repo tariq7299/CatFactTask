@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
+import './MyDataTable.scss'
 
 const MyDataTable = ({ data }) => {
 
@@ -11,17 +12,32 @@ const MyDataTable = ({ data }) => {
   }, [data]);
   console.log(dataWithIds)
 
+  const tableCustomStyles = {
+    headCells: {
+      style: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        paddingLeft: '0 8px',
+        justifyContent: 'center',
+        backgroundColor: '#FFA500'
+      },
+    },
+  }
+  
+
 
   const columns = [
     {
       name: 'ID',
       selector: row => row.id,
       sortable: true,
+      // maxWidth: "20px", 
     },
     {
       name: 'Fact',
       selector: row => row.fact,
       sortable: true,
+      // style: { background: "orange" }, 
     },
   ];
  
@@ -30,6 +46,7 @@ const MyDataTable = ({ data }) => {
       <DataTable
         columns={columns}
         data={dataWithIds}
+        customStyles={tableCustomStyles}
       />
     )
   }

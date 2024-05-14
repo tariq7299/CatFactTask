@@ -12,6 +12,10 @@ function AuthProvider({ children }) {
     return localStorage.getItem('token');
   }
   
+  const getUserData = () => {
+    return localStorage.getItem('userData');
+  }
+  
   const checkIfAuthenticated = (token) => {
 
     const storedToken = localStorage.getItem('token');
@@ -34,9 +38,9 @@ function AuthProvider({ children }) {
       if(!res.userData) {
         throw new Error(res.message);
       }
-
+      console.log("res.userData", res.userData)
       localStorage.setItem('token', res.token);
-      localStorage.setItem('userData', res.token);
+      localStorage.setItem('userData', res.userData.username);
 
       navigate("/")
       
@@ -58,7 +62,7 @@ function AuthProvider({ children }) {
 
 
   return (
-    <AuthContext.Provider value={{ getToken, checkIfAuthenticated, loginAction, logOut }}>
+    <AuthContext.Provider value={{ getToken, checkIfAuthenticated, loginAction, logOut, getUserData }}>
       {children}
     </AuthContext.Provider>
   );
