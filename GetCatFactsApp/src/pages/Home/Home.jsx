@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MyDataTable from '../../components/common/MyDataTable/MyDataTable';
+import CreateFactsForm from '../CreateFactsForm/CreateFactsForm';
 import { useAuth } from "../../hooks/AuthProvider";
 
 function Home() {
@@ -69,7 +70,9 @@ function Home() {
                     Next
                 </button>
 
-                <a onClick={handleLogout}>Logout</a>
+                <CreateFactsForm></CreateFactsForm>
+
+                <button onClick={handleLogout}>Logout</button>
                 
             </div>
         )}

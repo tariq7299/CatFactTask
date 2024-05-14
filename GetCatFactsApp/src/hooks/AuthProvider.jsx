@@ -5,8 +5,14 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const [token, setToken] = useState(null)
+  const [userData, setUserData] = useState(null)
   
-  const CheckIfAuthenticated = (token) => {
+  const getToken = () => {
+    return localStorage.getItem('token');
+  }
+  
+  const checkIfAuthenticated = (token) => {
 
     const storedToken = localStorage.getItem('token');
     return storedToken ? true : false;
@@ -49,8 +55,10 @@ function AuthProvider({ children }) {
     navigate("/login");
   };
 
+
+
   return (
-    <AuthContext.Provider value={{ CheckIfAuthenticated, loginAction, logOut }}>
+    <AuthContext.Provider value={{ getToken, checkIfAuthenticated, loginAction, logOut }}>
       {children}
     </AuthContext.Provider>
   );

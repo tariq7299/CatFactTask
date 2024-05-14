@@ -3,9 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
 
 const PrivateRoute = () => {
-  const { CheckIfAuthenticated } = useAuth();
+  const { checkIfAuthenticated } = useAuth();
 
-  const isAuthenticated = CheckIfAuthenticated()
+  const isAuthenticated = checkIfAuthenticated()
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />
