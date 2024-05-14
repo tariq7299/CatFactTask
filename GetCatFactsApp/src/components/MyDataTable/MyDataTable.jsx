@@ -20,6 +20,7 @@ const MyDataTable = ({ data }) => {
         paddingLeft: '0 8px',
         justifyContent: 'center',
         backgroundColor: '#FFA500',
+        // borderRadius: "20px"
 
       },
     },

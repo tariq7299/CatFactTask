@@ -11,7 +11,6 @@ const UsersCatFactsTable = ({ data }) => {
         paddingLeft: '0 8px',
         justifyContent: 'center',
         backgroundColor: '#FFA500',
-        minWidth: '400px'
       },
     },
   }

@@ -17,10 +17,16 @@
     gap: 5rem;
 
     .Internetfacts-table-container {
+        min-width: 300px;
+        max-width: 400px;
         .pagination-buttons-container {
             padding: 1rem 0;
             text-align: center;
         }
+    }
+    .users-cat-facts-table-container {
+        min-width: 300px;
+        max-width: 400px;
     }
 }
 

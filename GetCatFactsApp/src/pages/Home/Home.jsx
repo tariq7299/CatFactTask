@@ -100,14 +100,13 @@ function Home() {
                             
                         </div>
                     </div>
-                    <div>
-                        <h1> Here are users cat facts</h1>
+                    <div className='users-cat-facts-table-container'>
+                        <h1> Here are users cat fact </h1>
                         <UsersCatFactsTable data={usersCatFacts} />
                     </div>
                 </div>
 
                 <h1>You can also add your own facts ! Try it</h1>
-
                 <div>
                     <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
                 </div>
