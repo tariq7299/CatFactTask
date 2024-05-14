@@ -6,7 +6,7 @@ import CreateFactsForm from '../CreateFactsForm/CreateFactsForm';
 import { useAuth } from "../../hooks/AuthProvider";
 import './Home.scss'
 import MyButton from "../../components/common/MyButton/MyButton";
-import { Audio } from 'react-loader-spinner'
+import { ProgressBar } from 'react-loader-spinner'
 
 function Home() {
 
@@ -17,14 +17,15 @@ function Home() {
     const [usersCatFacts, setUsersCatFacts] = useState([]);
     const [newFactAdded, setNewFactAdded] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingUsersFacts, setIsLoadingUsersFacts] = useState(false);
+    const [isLoadingInternetFacts, setIsLoadingInternetFacts] = useState(false)
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
 
         const fetchUsersCatFacts = async () => {
             setIsError(false);
-            setIsLoading(true);
+            setIsLoadingUsersFacts(true);
             try {
                 const response = await axios.get('http://localhost:3000/api/facts');
 
@@ -36,7 +37,7 @@ function Home() {
                 console.error('Error fetching data:', error)
             }
 
-            setIsLoading(false);
+            setIsLoadingUsersFacts(false);
             
         };
 
@@ -48,14 +49,14 @@ function Home() {
 
         const fetchInternetCatFacts = async () => {
             setIsError(false);
-            setIsLoading(true);
+            setIsLoadingInternetFacts(true);
             try {
                 const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
 
                   // Simulate a delay of 0.6 seconds
                   setInternetCatFacts(response.data)
                   const timer = setTimeout(() => {
-                    setIsLoading(false);
+                    setIsLoadingInternetFacts(false);
                 }, 600);
 
                 return () => clearTimeout(timer);
@@ -65,7 +66,7 @@ function Home() {
                 console.error('Error fetching data:', error)
             }
 
-            setIsLoading(false);
+            setIsLoadingInternetFacts(false);
         
         };
 
@@ -95,17 +96,7 @@ function Home() {
     return (
         <div>
             {isError && <div>Error fetching Cat Facts !!!</div>}
-            {isLoading ? (
-            <Audio
-            height="80"
-            width="80"
-            radius="9"
-            color="green"
-            ariaLabel="loading"
-            wrapperStyle
-            wrapperClass
-          />
-            ) : (
+          
             <div>
 
                 <h1 className='greeting-header'>Hello {username} !</h1>
@@ -115,7 +106,19 @@ function Home() {
                     <div className='Internetfacts-table-container'>
 
                         <h1> Here are some Cat facts from the internet</h1>
-                        <MyDataTable data={internetCatFacts.data} />
+
+                        {isLoadingInternetFacts ? (
+           <ProgressBar
+           visible={true}
+           height="80"
+           width="80"
+           color="#4fa94d"
+           ariaLabel="progress-bar-loading"
+           wrapperStyle={{}}
+           wrapperClass=""
+           />
+            ) : ( <MyDataTable data={internetCatFacts.data} />)}
+                       
                         <div className='pagination-buttons-container'>
                             <MyButton handleOnClick={handleNextPage} isDisabled={!internetCatFacts.next_page_url} text="Previous" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
 
@@ -140,7 +143,6 @@ function Home() {
                 </div>
                 
             </div>
-        )}
       </div>
 
     )
