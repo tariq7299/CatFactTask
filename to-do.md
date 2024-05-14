@@ -17,6 +17,7 @@
 ## login  
 - Try to encrypt localstorage user toke
 - Fix error chunk-YI7ZP7WZ.js?v=fc7ea98c:521 Warning: Cannot update a component (`AuthProvider`) while rendering a different component (`PrivateRoute`). To locate the bad setState() call inside `PrivateRoute`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+- Remove password should be 6 cha.... message
 
 # Backend
 

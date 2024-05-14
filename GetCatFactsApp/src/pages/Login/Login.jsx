@@ -13,6 +13,7 @@ export default function Login() {
       });
       
       const auth = useAuth();
+      
       const handleSubmitEvent = (e) => {
         e.preventDefault();
         if (input.username !== "" && input.password !== "") {

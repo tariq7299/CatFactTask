@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
+const tokenStorage = {};
 
 const users = [
   { id: 1, username: 'hassan', password: '1122' },
@@ -20,7 +21,9 @@ app.get("/", (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
+
   const { username, password } = req.body;
+
   const user = users.find(
     (u) => u.username === username && u.password === password
   );
@@ -30,20 +33,15 @@ app.post('/api/login', (req, res) => {
   }
 
   const token = generateToken(user.id);
+
+  tokenStorage[token] = user.id;
+
   const userData = {
     id: user.id,
     username: user.username,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    email: user.email,
   };
 
   res.json({ token, userData });
-});
-
-
-app.get('/api/protected', authenticateToken, (req, res) => {
-  res.json({ message: 'Access granted' });
 });
 
 
@@ -54,19 +52,25 @@ function generateToken(userId) {
   return hash;
 }
 
+app.get('/api/protected', authenticateToken, (req, res) => {
+  res.json({ message: 'Access granted' });
+});
+
 
 function authenticateToken(req, res, next) {
-  const token = req.headers['x-auth-token'];
+  const token = req.headers.authorization?.split(' ')[1];
 
-  if (!token) {
-    return res.status(401).json({ message: 'Missing token' });
+  if (!token || !tokenStorage[token]) {
+    return res.status(401).json({ message: 'Invalid token' });
   }
 
-  const userId = users.findIndex(user => generateToken(user.id) === token);
+  const userId = tokenStorage[token];
+  const user = users.find(u => u.id === userId);
 
-  if (userId === -1) {
-    return res.status(403).json({ message: 'Invalid token' });
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid token' });
   }
+
 
   req.userId = users[userId].id;
   next();
