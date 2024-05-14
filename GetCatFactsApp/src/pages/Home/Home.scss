@@ -26,6 +26,14 @@
             padding: 1rem 0;
             text-align: center;
         }
+        .progress-bar-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 330px;
+            min-height: 532px;
+        }
+
     }
     .users-cat-facts-table-container {
         min-width: 330px;
@@ -33,6 +41,14 @@
         h1 {
             text-align: center;
         }
+        .progress-bar-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 330px;
+            min-height: 290px;
+        }
+
     }
 }
 .add-new-fact-container{

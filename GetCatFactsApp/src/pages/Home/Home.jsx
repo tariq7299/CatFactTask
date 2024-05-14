@@ -32,6 +32,15 @@ function Home() {
                 console.log("response", response)
 
                 setUsersCatFacts(response.data)
+                // Simulate a delay of 0.6 seconds
+                setIsLoadingUsersFacts(response.data)
+                
+                const timer = setTimeout(() => {
+                    setIsLoadingUsersFacts(false);
+                }, 600);
+
+                return () => clearTimeout(timer);
+
             } catch (error) {
                 setIsError(true);
                 console.error('Error fetching data:', error)
@@ -108,15 +117,17 @@ function Home() {
                         <h1> Here are some Cat facts from the internet</h1>
 
                         {isLoadingInternetFacts ? (
-           <ProgressBar
-           visible={true}
-           height="80"
-           width="80"
-           color="#4fa94d"
-           ariaLabel="progress-bar-loading"
-           wrapperStyle={{}}
-           wrapperClass=""
-           />
+                            <div className='progress-bar-container'>     <ProgressBar
+                            visible={true}
+                            height="80"
+                            width="80"
+                            barColor="#fff"
+                            borderColor="#ffda6a"
+                            ariaLabel="progress-bar-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            /></div>
+      
             ) : ( <MyDataTable data={internetCatFacts.data} />)}
                        
                         <div className='pagination-buttons-container'>
@@ -128,7 +139,21 @@ function Home() {
                     </div>
                     <div className='users-cat-facts-table-container'>
                         <h1> Here are users cat fact </h1>
-                        <UsersCatFactsTable data={usersCatFacts} />
+
+                        
+                        {isLoadingUsersFacts ? (
+                            <div className='progress-bar-container'>     <ProgressBar
+                            visible={true}
+                            height="80"
+                            width="80"
+                            barColor="#fff"
+                            borderColor="#ffda6a"
+                            ariaLabel="progress-bar-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            /></div>
+      
+            ) : ( <UsersCatFactsTable data={usersCatFacts} />)}
                     </div>
                 </div>
 
