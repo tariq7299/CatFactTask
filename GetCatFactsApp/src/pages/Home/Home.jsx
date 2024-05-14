@@ -6,6 +6,7 @@ import CreateFactsForm from '../CreateFactsForm/CreateFactsForm';
 import { useAuth } from "../../hooks/AuthProvider";
 import './Home.scss'
 import MyButton from "../../components/common/MyButton/MyButton";
+import { Audio } from 'react-loader-spinner'
 
 function Home() {
 
@@ -28,7 +29,7 @@ function Home() {
                 const response = await axios.get('http://localhost:3000/api/facts');
 
                 console.log("response", response)
-                
+
                 setUsersCatFacts(response.data)
             } catch (error) {
                 setIsError(true);
@@ -36,29 +37,43 @@ function Home() {
             }
 
             setIsLoading(false);
+            
         };
+
+        fetchUsersCatFacts();
+        setNewFactAdded(false)
+    }, [newFactAdded]);
+
+    useEffect(() => {
 
         const fetchInternetCatFacts = async () => {
             setIsError(false);
             setIsLoading(true);
             try {
                 const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
-                console.log("response", response)
-                setInternetCatFacts(response.data)
+
+                  // Simulate a delay of 0.6 seconds
+                  setInternetCatFacts(response.data)
+                  const timer = setTimeout(() => {
+                    setIsLoading(false);
+                }, 600);
+
+                return () => clearTimeout(timer);
+                
             } catch (error) {
                 setIsError(true);
                 console.error('Error fetching data:', error)
             }
 
             setIsLoading(false);
+        
         };
 
         fetchInternetCatFacts();
-        fetchUsersCatFacts();
-        setNewFactAdded(false)
+      
+      
+    }, [currentPage]);
         
-
-    }, [currentPage, newFactAdded]);
 
     const handlePrevPage = () => {
         if (internetCatFacts.prev_page_url ) {
@@ -81,7 +96,15 @@ function Home() {
         <div>
             {isError && <div>Error fetching Cat Facts !!!</div>}
             {isLoading ? (
-            <div>Loading...</div>
+            <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="green"
+            ariaLabel="loading"
+            wrapperStyle
+            wrapperClass
+          />
             ) : (
             <div>
 
