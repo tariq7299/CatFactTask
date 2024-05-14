@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import MyDataTable from '../../components/MyDataTable/MyDataTable';
+import InternetCatFactsTable from '../../components/InternetCatFactsTable/InternetCatFactsTable';
 import UsersCatFactsTable from '../../components/UsersCatFactsTable/UsersCatFactsTable';
 import CreateFactsForm from '../CreateFactsForm/CreateFactsForm';
 import { useAuth } from "../../hooks/AuthProvider";
@@ -128,7 +128,7 @@ function Home() {
                             wrapperClass=""
                             /></div>
       
-            ) : ( <MyDataTable data={internetCatFacts.data} />)}
+            ) : ( <InternetCatFactsTable internetCatFacts={internetCatFacts.data} />)}
                        
                         <div className='pagination-buttons-container'>
                             <MyButton handleOnClick={handleNextPage} isDisabled={!internetCatFacts.next_page_url} text="Previous" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
@@ -153,7 +153,8 @@ function Home() {
                             wrapperClass=""
                             /></div>
       
-            ) : ( <UsersCatFactsTable data={usersCatFacts} />)}
+            ) : ( <UsersCatFactsTable UsersCatFacts
+                usersCatFacts={usersCatFacts} />)}
                     </div>
                 </div>
 

@@ -1,28 +1,27 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
-  const [token, setToken] = useState(null)
-  const [userData, setUserData] = useState(null)
   
   const getToken = () => {
-    return localStorage.getItem('token');
+    return Cookies.get('token');
+
   }
   
   const getUserData = () => {
     return localStorage.getItem('userData');
   }
   
-  const checkIfAuthenticated = (token) => {
-
-    const storedToken = localStorage.getItem('token');
+  const checkIfAuthenticated = () => {
+    const storedToken = Cookies.get('token');
     return storedToken ? true : false;
 };
 
-  const loginAction = async (loginData) => {
+  const logIn = async (loginData) => {
     try {
 
       const response = await fetch("http://localhost:3000/api/login", {
@@ -38,10 +37,9 @@ function AuthProvider({ children }) {
       if(!res.userData) {
         throw new Error(res.message);
       }
-      console.log("res.userData", res.userData)
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('userData', res.userData.username);
 
+      Cookies.set('token', res.token, { expires: 7 });
+      localStorage.setItem('userData', res.userData.username);
       navigate("/")
       
     } catch (err) {
@@ -55,14 +53,14 @@ function AuthProvider({ children }) {
 
   const logOut = () => {
     localStorage.removeItem("userData");
-    localStorage.removeItem("token");
+    Cookies.remove('token');
     navigate("/login");
   };
 
 
 
   return (
-    <AuthContext.Provider value={{ getToken, checkIfAuthenticated, loginAction, logOut, getUserData }}>
+    <AuthContext.Provider value={{ getToken, checkIfAuthenticated, logIn, logOut, getUserData }}>
       {children}
     </AuthContext.Provider>
   );

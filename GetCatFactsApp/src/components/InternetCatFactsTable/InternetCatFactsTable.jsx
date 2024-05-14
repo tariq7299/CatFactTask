@@ -1,16 +1,15 @@
 import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
-import './MyDataTable.scss'
+import './InternetCatFactsTable.scss'
 
-const MyDataTable = ({ data }) => {
+const InternetCatFactsTable = ({ internetCatFacts }) => {
 
  
   
-  const dataWithIds = useMemo(() => {
-    if (!data) return [];
-    return data.map((row, index) => ({ ...row, id: index + 1 }));
-  }, [data]);
-  console.log(dataWithIds)
+  const internetCatFactsWithIds = useMemo(() => {
+    if (!internetCatFacts) return [];
+    return internetCatFacts.map((row, index) => ({ ...row, id: index + 1 }));
+  }, [internetCatFacts]);
 
   const tableCustomStyles = {
     headCells: {
@@ -33,7 +32,7 @@ const MyDataTable = ({ data }) => {
       selector: row => row.id,
       sortable: true,
       width: "80px",
-      cell: (row) => <div className="id-cell custom-font">{row.id}</div>,
+      cell: (row) => <div className="custom-font">{row.id}</div>,
 
       
     },
@@ -49,10 +48,10 @@ const MyDataTable = ({ data }) => {
     return (
       <DataTable
         columns={columns}
-        data={dataWithIds}
+        data={internetCatFactsWithIds}
         customStyles={tableCustomStyles}
       />
     )
   }
 
-export default MyDataTable
+export default InternetCatFactsTable

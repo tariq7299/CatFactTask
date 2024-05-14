@@ -7,10 +7,7 @@ import MyButton from '../../components/common/MyButton/MyButton';
 const CreateFactsForm = ({setNewFactAdded}) => {
 
     const { getToken } = useAuth() 
-
     const token = getToken()
-
-    console.log("token", token)
     
   const [formData, setFormData] = useState({
     newCatFact: '',
@@ -23,10 +20,9 @@ const CreateFactsForm = ({setNewFactAdded}) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitingNewFact = async (e) => {
     e.preventDefault();
 
-    console.log('Form submitted with data:', formData);
 
     try {
         
@@ -51,13 +47,11 @@ const CreateFactsForm = ({setNewFactAdded}) => {
     });
     setNewFactAdded(true)
 
-
-
   };
 
   return (
 
-    <form className='add-fact-form' onSubmit={handleSubmit}>
+    <form className='add-fact-form' onSubmit={handleSubmitingNewFact}>
       <div className='add-fact-form-elements-container'>
         <label htmlFor="inputField">Enter your cat fact</label>
         <input

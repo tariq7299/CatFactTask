@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
 import './UsersCatFactsTable.scss'
 
-const UsersCatFactsTable = ({ data }) => {
+const UsersCatFactsTable = ({ usersCatFacts }) => {
 
   const tableCustomStyles = {
     headCells: {
@@ -41,7 +41,7 @@ const UsersCatFactsTable = ({ data }) => {
 
       <DataTable
         columns={columns}
-        data={data}
+        data={usersCatFacts}
         customStyles={tableCustomStyles}
       />
     )

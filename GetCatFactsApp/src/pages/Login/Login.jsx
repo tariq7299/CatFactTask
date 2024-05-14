@@ -18,7 +18,7 @@ export default function Login() {
       const handleSubmitEvent = (e) => {
         e.preventDefault();
         if (input.username !== "" && input.password !== "") {
-          auth.loginAction(input);
+          auth.logIn(input);
           return;
         }
         alert("please provide a valid input");

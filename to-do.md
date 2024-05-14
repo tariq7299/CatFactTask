@@ -19,7 +19,7 @@
 
 
 
-## MyDataTable
+## InternetCatFactsTable
 - Change ID field content from lenght to real id  
 
 
