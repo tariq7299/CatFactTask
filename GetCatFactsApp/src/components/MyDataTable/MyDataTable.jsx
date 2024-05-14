@@ -20,7 +20,6 @@ const MyDataTable = ({ data }) => {
         paddingLeft: '0 8px',
         justifyContent: 'center',
         backgroundColor: '#FFA500',
-        // borderRadius: "20px"
 
       },
     },
@@ -33,13 +32,16 @@ const MyDataTable = ({ data }) => {
       name: 'ID',
       selector: row => row.id,
       sortable: true,
-      // maxWidth: "20px", 
+      width: "80px",
+      cell: (row) => <div className="id-cell custom-font">{row.id}</div>,
+
+      
     },
     {
       name: 'Fact',
       selector: row => row.fact,
       sortable: true,
-      // style: { background: "orange" }, 
+      cell: (row) => <div className="custom-font">{row.fact}</div>,
     },
   ];
  

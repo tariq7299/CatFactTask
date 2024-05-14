@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
+import './UsersCatFactsTable.scss'
 
 const UsersCatFactsTable = ({ data }) => {
 
@@ -12,8 +13,10 @@ const UsersCatFactsTable = ({ data }) => {
         justifyContent: 'center',
         backgroundColor: '#FFA500',
       },
+     
     },
   }
+  
   
 
   const columns = [
@@ -21,11 +24,15 @@ const UsersCatFactsTable = ({ data }) => {
       name: 'User',
       selector: row => row.owner,
       sortable: true,
+      width: "80px", 
+      cell: (row) => <div className="custom-font">{row.owner}</div>,
+      
     },
     {
       name: 'Fact',
       selector: row => row.catFact,
       sortable: true,
+      cell: (row) => <div className="custom-font">{row.catFact}</div>,
     },
   ];
  

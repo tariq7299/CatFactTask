@@ -106,8 +106,8 @@ function Home() {
                     </div>
                 </div>
 
-                <h1>You can also add your own facts ! Try it</h1>
-                <div>
+                <div className='add-new-fact-container'>
+                    <h1>You can also add your own facts ! Try it</h1>
                     <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
                 </div>
 

@@ -64,6 +64,7 @@ const CreateFactsForm = ({setNewFactAdded}) => {
           type="text"
           id="inputField"
           name="newCatFact"
+          placeholder='cats like marshmallow...'
           value={formData.newCatFact}
           onChange={handleInputChange}
         />

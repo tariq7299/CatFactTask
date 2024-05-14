@@ -40,11 +40,14 @@
 ## CreateFactsForm 
 - Use useEffect to get the token or maybe use getToken() directly in the request
 
+## Authporvided  
+- CHange all function declerations to function () {} instead of const ...
+
 # Backend
 
 ## GLOBAL
 - Add watch abiltiy to be able to reload the backend whenever any changes happnes
 - Add more user cat fact at least like 7
 
-## Authporvided  
-- CHange all function declerations to function () {} instead of const ...
+## creat New fact route
+- Handle emnpty fact input

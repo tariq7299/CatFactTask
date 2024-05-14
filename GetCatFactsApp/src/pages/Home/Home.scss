@@ -13,23 +13,40 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    padding: 3rem 1rem ;
-    gap: 5rem;
+    padding: 3rem 0rem ;
+    gap: 2rem;
 
     .Internetfacts-table-container {
-        min-width: 300px;
+        min-width: 330px;
         max-width: 400px;
+        h1 {
+            text-align: center;
+        }
         .pagination-buttons-container {
             padding: 1rem 0;
             text-align: center;
         }
     }
     .users-cat-facts-table-container {
-        min-width: 300px;
+        min-width: 330px;
         max-width: 400px;
+        h1 {
+            text-align: center;
+        }
+    }
+}
+.add-new-fact-container{
+    h1 {
+        text-align: center;
     }
 }
 
 .footer {
-    padding: 4rem 0;
+    display: flex;
+    font-size: 0.5rem;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: baseline;
+    padding:  10rem 0 4rem 0;
 }
