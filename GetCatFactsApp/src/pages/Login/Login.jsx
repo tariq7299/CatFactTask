@@ -34,7 +34,7 @@ export default function Login() {
       return (
         <div className="parent-container">
         <div className="header-container">
-        <h1>Wellcome to my Cat Facts App </h1>
+        <h1>Wellcome to my Cat Facts WebSite </h1>
         <ResponsiveCat></ResponsiveCat>
         </div>
         <form onSubmit={handleSubmitEvent}>
