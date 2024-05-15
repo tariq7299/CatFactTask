@@ -36,11 +36,12 @@ const CreateFactsForm = ({setNewFactAdded}) => {
         if (response.status === 200 || response.status === 201) {
           alert("catfact added successfully!");
         } else {
-          throw new Error("Something went wrong");
+          throw new Error();
         }
       } catch (error) {
         console.error(error);
         alert("Something bad happened");
+        
     }
 
     setFormData({

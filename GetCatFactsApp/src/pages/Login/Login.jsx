@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/AuthProvider";
 import "./Login.scss";
 import ResponsiveCat from "../../components/ResponsiveCat/ResponsiveCat";
-import MyButton from "../../components/common/MyButton/MyButton";
-
+import MyButton from "../../components/common/MyButton/MyButton"
+import MyAlert from "../../components/common/MyAlert/MyAlert"
+import { useAlert } from "../../hooks/AlertProvider";
 
 export default function Login() {
+
+
+  const { alerts, addAlert } = useAlert();
+
     
 
       const [input, setInput] = useState({
@@ -21,7 +26,8 @@ export default function Login() {
           auth.logIn(input);
           return;
         }
-        alert("please provide a valid input");
+        addAlert('Please provide a valid username/password !', 'danger');
+    
       };
     
       const handleInput = (e) => {
@@ -34,10 +40,15 @@ export default function Login() {
     
       return (
         <div className="parent-container">
+          
         <div className="header-container">
         <h1>Wellcome to my Cat Facts WebSite </h1>
         <ResponsiveCat></ResponsiveCat>
         </div>
+ 
+        {alerts.map((_, index) => (
+        <MyAlert key={index} index={index} />
+      ))}
         <form className="login-form" onSubmit={handleSubmitEvent}>
           <div className="form_control">
             <label htmlFor="user-username">Username</label>

@@ -1,11 +1,13 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import { useAlert } from "./AlertProvider";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const { alerts, addAlert } = useAlert();
   
   const getToken = () => {
     return Cookies.get('token');
@@ -46,7 +48,7 @@ function AuthProvider({ children }) {
 
       console.error(err);
 
-      alert(err)
+      addAlert('username/password is wrong !!', 'danger');
 
     }
   };
