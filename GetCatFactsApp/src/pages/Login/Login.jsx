@@ -26,7 +26,7 @@ export default function Login() {
           auth.logIn(input);
           return;
         }
-        addAlert('Please provide a valid username/password !', 'danger');
+        addAlert("Username/Password can't be empty!", 'danger');
     
       };
     

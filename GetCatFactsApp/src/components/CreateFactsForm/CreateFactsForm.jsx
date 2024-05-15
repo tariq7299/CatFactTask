@@ -29,6 +29,12 @@ const CreateFactsForm = ({setNewFactAdded}) => {
 
 
     try {
+
+      if (formData.newCatFact === "") {
+        addAlert("Cat fact can't be empty !", 'danger');
+        return;
+      }
+
         
         const response = await axios.post("http://localhost:3000/api/facts/create", formData, {
           headers: {
@@ -44,8 +50,7 @@ const CreateFactsForm = ({setNewFactAdded}) => {
         }
       } catch (error) {
         console.error(error);
-        alert("Something bad happened");
-
+        addAlert("Something bad happened ! Please contact support !", 'danger');
     }
 
     setFormData({
@@ -60,7 +65,8 @@ const CreateFactsForm = ({setNewFactAdded}) => {
     <form className='add-fact-form' onSubmit={handleSubmitingNewFact}>
  
  {alerts.map((alert, index) => (
-        <MyAlert key={alert.id} index={index} alertId={alert.id} />
+  <div className='alerts-container'><MyAlert key={alert.id} index={index} alertId={alert.id} /></div>
+        
       ))}
       <div className='add-fact-form-elements-container'>
         <label htmlFor="inputField">Enter your cat fact</label>

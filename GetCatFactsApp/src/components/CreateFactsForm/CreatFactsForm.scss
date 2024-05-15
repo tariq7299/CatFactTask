@@ -3,6 +3,11 @@
 form.add-fact-form {
     width: 100%;
 
+    .alerts-container {
+        max-width: 300px;
+        margin: auto;
+    }
+
     .add-fact-form-elements-container{
         width: 100%;
         display: flex;
