@@ -24,6 +24,9 @@ function AuthProvider({ children }) {
 
   const logIn = async (loginData) => {
     try {
+        // TASK #1 : Fetch data from an API
+          // Use Axios
+          // Handle errors
       const response = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
         headers: {
@@ -44,7 +47,7 @@ function AuthProvider({ children }) {
     } catch (err) {
       console.error(err);
 
-      addAlert('username/password is wrong !!', 'danger');
+      addAlert('username/password is wrong ⛔', 'danger');
     }
   };
 

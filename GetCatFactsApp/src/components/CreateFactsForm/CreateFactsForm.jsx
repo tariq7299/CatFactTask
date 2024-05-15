@@ -5,11 +5,18 @@ import './CreatFactsForm.scss';
 import MyButton from '../common/MyButton/MyButton';
 import MyAlert from '../common/MyAlert/MyAlert';
 import { useAlert } from '../../hooks/AlertProvider';
+import { useNavigate } from 'react-router-dom';
 
+
+
+      // TASK #4 : Manage app state using Context API and CRUD operations
+                    // Use CRUD operatins
+                    // Implement Responsive design
 const CreateFactsForm = ({ setNewFactAdded }) => {
   const { getToken } = useAuth();
   const token = getToken();
   const { alerts, addAlert } = useAlert();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     newCatFact: '',
@@ -27,7 +34,7 @@ const CreateFactsForm = ({ setNewFactAdded }) => {
 
     try {
       if (formData.newCatFact === '') {
-        addAlert("Cat fact can't be empty !", 'danger');
+        addAlert("Cat fact can't be empty 🤓", 'danger');
         return;
       }
 
@@ -40,15 +47,18 @@ const CreateFactsForm = ({ setNewFactAdded }) => {
           },
         }
       );
-
       if (response.status === 200 || response.status === 201) {
-        addAlert('Your Cat fact was added successfully !!', 'success');
+        addAlert('Cat Fact Added 👍', 'success');
       } else {
         throw new Error();
       }
     } catch (error) {
-      console.error(error);
-      addAlert('Something bad happened ! Please contact support !', 'danger');
+      if (error.response && error.response.status === 401) {
+        navigate('/login');
+      } else {
+        addAlert('Something bad happened ! Please contact support !', 'danger');
+      }
+
     }
 
     setFormData({

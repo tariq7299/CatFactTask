@@ -7,6 +7,7 @@ import { useAuth } from '../../hooks/AuthProvider';
 import './Home.scss';
 import MyButton from '../../components/common/MyButton/MyButton';
 import { ProgressBar } from 'react-loader-spinner';
+import { Emoji } from 'react-emoji';
 
 function Home() {
   const { logOut, getUserData } = useAuth();
@@ -21,7 +22,7 @@ function Home() {
   return (
     <div>
       <div>
-        <h1 className="greeting-header">Hello {username} !</h1>
+        <h1 className="greeting-header">Hello 👋 😺 <span>{username}</span> !</h1>
 
         <div className="tables-container">
           <InternetCatFactsTable />
@@ -32,7 +33,7 @@ function Home() {
         </div>
 
         <div className="add-new-fact-container">
-          <h1>You can also add your own facts ! Try it</h1>
+          <h1>You can also add your own facts ! Try it 👇</h1>
           <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
         </div>
 
@@ -41,7 +42,7 @@ function Home() {
           <MyButton
             buttonColor="secondary-color"
             textColor="red"
-            text="Exit"
+            text="Exit 😿"
             handleOnClick={handleLogout}
           >
             GoodBye

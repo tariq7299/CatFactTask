@@ -18,6 +18,9 @@ const InternetCatFactsTable = () => {
       setIsErrorFetchingInternetCatFacts(false);
       setIsLoadingInternetFacts(true);
       try {
+        // TASK #1 : Fetch data from an API
+          // Use Axios
+          // Handle errors
         const response = await axios.get(
           `https://catfact.ninja/facts?page=${currentPage}&max_length=70`
         );
@@ -72,6 +75,10 @@ const InternetCatFactsTable = () => {
     },
   };
 
+
+               // TASK #3 : Display Data using React Data Table Compoenet
+                    // Use Sorting, filtring, and paginatation in the table
+                    // Use React Data Table Component
   const columns = [
     {
       name: 'ID',
@@ -90,7 +97,7 @@ const InternetCatFactsTable = () => {
 
   return (
     <div className="Internetfacts-table-container">
-      <h1> Here are some Cat facts from the internet</h1>
+      <h1> Here are some Cat facts 💯 from the internet</h1>
 
       {isErrorFetchingInternetCatFacts ? (
         <div className="error-message">

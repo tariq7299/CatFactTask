@@ -5,6 +5,8 @@ import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Home from './pages/Home/Home';
 import AlertProvider from './hooks/AlertProvider';
 
+// TASK #4 : Manage app state using Context API and CRUD operations
+              // Add Authentication using React Context API
 function App() {
   return (
     <>

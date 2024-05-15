@@ -1,9 +1,15 @@
 @import './../../variables';
 
 .greeting-header {
+  margin: auto;
   font-size: 4rem;
   text-align: center;
   padding: 2rem 0rem;
+  max-width: 80vw;
+
+  span {
+    color: $color-white;
+  }
 }
 
 .tables-container {
