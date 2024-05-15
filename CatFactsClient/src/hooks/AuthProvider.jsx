@@ -11,7 +11,10 @@ function AuthProvider({ children }) {
   const { alerts, addAlert } = useAlert();
 
   function getToken() {
-    return Cookies.get('token');
+    const testToken = Cookies.get('token');
+    console.log("testToken", testToken)
+
+    return testToken;
   }
   
   function getUserData() {
@@ -40,7 +43,7 @@ function AuthProvider({ children }) {
         throw new Error(res.message);
       }
   
-      Cookies.set('token', res.token, { expires: 7 });
+      Cookies.set('token', res.token);
       localStorage.setItem('userData', res.userData.username);
       navigate('/');
     } catch (err) {
