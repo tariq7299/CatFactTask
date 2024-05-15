@@ -10,12 +10,18 @@ import { useNavigate } from 'react-router-dom';
 
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
-  const { getToken } = useAuth();
+  const { getToken , getUserData } = useAuth();
   
+
 
   const token = useMemo(() => {
     return getToken();
   }, [getToken]);
+
+  const username = useMemo(() => {
+    return getUserData();
+  }, [getUserData]);
+  console.log("username", username)
 
   const { alerts, addAlert } = useAlert();
 
@@ -136,9 +142,17 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     },
     {
       name: 'Action',
-      cell: (row) => <div className="custom-font"><button onClick={() => {
-        handleDeletUserCatFact(row.factId)
-      }}>Delete</button></div>,
+      cell: (row) => (
+        <div className="custom-font">
+          {row.owner.toLowerCase() === username ? (
+            <button onClick={() => handleDeletUserCatFact(row.factId)}>
+              Delete
+            </button>
+          ) : (
+            ''
+          )}
+        </div>
+      ),
     },
   ];
 
