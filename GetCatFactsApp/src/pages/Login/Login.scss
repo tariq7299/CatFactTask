@@ -5,7 +5,7 @@
   display: flex;
   flex-flow: column nowrap;
   height: 100lvh;
-  justify-content: ceneter;
+  justify-content: baseline;
   align-items: center;
   padding: 1rem 3rem 0 3rem;
   span {
@@ -15,6 +15,7 @@
     padding-bottom: 2.5rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-flow: row wrap;
     gap: 4rem;
 
@@ -24,6 +25,13 @@
     }
   }
 }
+
+@media (min-width: 768px) {
+    .header-container {
+     padding-top: 5rem;
+    }
+  }
+  
 
 form.login-form {
   padding: 0 0 0rem 0 ;
@@ -40,13 +48,15 @@ form.login-form {
 
     label {
       font-size: 2rem;
-      // display: block;
+      display: block;
       padding-bottom: 0.25rem;
     }
     input[type='text'],
     input[type='password'] {
       width: 100%;
+      max-width: 400px;
       padding: 0.5em;
+    //   margin-inline: auto;
       border: 1px solid #ddd;
       border-radius: 4px;
     }
