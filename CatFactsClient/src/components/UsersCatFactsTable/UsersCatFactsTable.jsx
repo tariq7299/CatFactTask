@@ -43,6 +43,8 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     setNewFactAdded(false);
   }, [newFactAdded]);
 
+
+
   const tableCustomStyles = {
     headCells: {
       style: {
