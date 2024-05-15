@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div className="parent-container">
       <div className="header-container">
-        <h1>Wellcome to my Cat Facts WebSite </h1>
+        <h1>Wellcome to my <br></br><span>Cat Facts</span> <br></br>WebSite </h1>
         <ResponsiveCat></ResponsiveCat>
       </div>
 
