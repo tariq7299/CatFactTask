@@ -7,11 +7,12 @@
   font-weight: 600;
   font-size: 1.5rem;
 
-  &:hover {
+}
+
+.hover-effect:hover{
     background-color: $color-black;
     border-color: $secondary-color;
     color: $color-white;
-  }
 }
 
 .secondary-color {
