@@ -1,24 +1,23 @@
 @import './../../../_variables.scss';
 
 .action-button {
-    padding: 0.5rem 3rem;
-    border: black 1px solid; 
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 1.5rem;
+  padding: 0.5rem 3rem;
+  border: black 1px solid;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1.5rem;
 
-    &:hover {
-        background-color: $color-black;
-        border-color: $secondary-color;
-        color: $color-white;
-    }
+  &:hover {
+    background-color: $color-black;
+    border-color: $secondary-color;
+    color: $color-white;
+  }
 }
 
 .secondary-color {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
 }
 
 .red {
-    background-color: rgb(193, 25, 25);
+  background-color: rgb(193, 25, 25);
 }
-

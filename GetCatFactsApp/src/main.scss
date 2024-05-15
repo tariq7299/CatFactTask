@@ -1,14 +1,12 @@
 @import './_variables.scss';
 @import 'customBootStrapSassStyles.scss';
 
-
 body {
   background-color: $color-black;
   color: $secondary-color;
-  font-family: "Amatic SC", sans-serif;
+  font-family: 'Amatic SC', sans-serif;
 }
 
 .custom-font {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
-

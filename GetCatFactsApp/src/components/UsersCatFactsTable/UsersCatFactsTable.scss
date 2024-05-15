@@ -1,23 +1,21 @@
-
 .users-cat-facts-table-container {
   min-width: 330px;
   max-width: 350px;
   h1 {
-      text-align: center;
+    text-align: center;
   }
-  .progress-bar-container{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 330px;
-      min-height: 290px;
-  }                                                                             
+  .progress-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 330px;
+    min-height: 290px;
+  }
+}
 
+@media (min-width: 768px) {
+  .users-cat-facts-table-container {
+    min-width: 400px;
+    max-width: 600px;
   }
-
-  @media (min-width: 768px) {
-      .users-cat-facts-table-container {
-          min-width: 400px;
-          max-width: 600px;
-      }
-  }
+}

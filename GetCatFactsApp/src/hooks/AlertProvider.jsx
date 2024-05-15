@@ -1,10 +1,9 @@
 // src/AlertContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 const AlertContext = createContext();
-
 
 const AlertProvider = ({ children }) => {
   const [alerts, setAlerts] = useState([]);
@@ -23,7 +22,6 @@ const AlertProvider = ({ children }) => {
     setAlerts([]);
   }, [location]);
 
-
   return (
     <AlertContext.Provider value={{ alerts, addAlert, removeAlert }}>
       {children}
@@ -34,5 +32,5 @@ const AlertProvider = ({ children }) => {
 export default AlertProvider;
 
 export const useAlert = () => {
-    return useContext(AlertContext);
-  };
+  return useContext(AlertContext);
+};

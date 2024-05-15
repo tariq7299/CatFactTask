@@ -1,26 +1,25 @@
 @import './../../variables';
 
 form.add-fact-form {
+  width: 100%;
+
+  .alerts-container {
+    max-width: 300px;
+    margin: auto;
+  }
+
+  .add-fact-form-elements-container {
     width: 100%;
-
-    .alerts-container {
-        max-width: 300px;
-        margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: baseline;
+    label {
+      font-size: 1.5rem;
     }
-
-    .add-fact-form-elements-container{
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        gap: 1rem;
-        justify-content: center;
-        align-items: baseline;
-        label {
-            font-size: 1.5rem;
-        }
-        input{
-            min-width: 120px;
-        }
-
+    input {
+      min-width: 120px;
     }
+  }
 }

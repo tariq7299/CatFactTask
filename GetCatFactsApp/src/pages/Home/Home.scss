@@ -1,49 +1,42 @@
-
 @import './../../variables';
 
-
 .greeting-header {
-    font-size: 4rem;
-    text-align: center;
-    padding: 2rem 0rem
+  font-size: 4rem;
+  text-align: center;
+  padding: 2rem 0rem;
 }
 
 .tables-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: baseline;
-    padding: 3rem 0rem ;
-    gap: 2rem;
-
-  
-
-
-
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: baseline;
+  padding: 3rem 0rem;
+  gap: 2rem;
 }
 
 .error-message {
-    text-align: center;
-    font-family: "Montserrat", sans-serif;
-    color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: min(30vh, 300px);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: min(30vh, 300px);
 }
 
-.add-new-fact-container{
-    h1 {
-        text-align: center;
-    }
+.add-new-fact-container {
+  h1 {
+    text-align: center;
+  }
 }
 
 .footer {
-    display: flex;
-    font-size: 0.5rem;
-    flex-flow: row nowrap;
-    gap: 1rem;
-    justify-content: center;
-    align-items: baseline;
-    padding:  10rem 0 4rem 0;
+  display: flex;
+  font-size: 0.5rem;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: baseline;
+  padding: 10rem 0 4rem 0;
 }

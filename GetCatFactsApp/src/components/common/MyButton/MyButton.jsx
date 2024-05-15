@@ -1,11 +1,15 @@
-import './MyButton.scss'
+import './MyButton.scss';
 
 function MyButton({ text, buttonColor, textColor, handleOnClick, isDisabled }) {
-
-    return (
-        <button className={`action-button ${textColor} ${buttonColor}`} onClick={handleOnClick} disabled={isDisabled}>{text}</button>
-    )
-
+  return (
+    <button
+      className={`action-button ${textColor} ${buttonColor}`}
+      onClick={handleOnClick}
+      disabled={isDisabled}
+    >
+      {text}
+    </button>
+  );
 }
 
-export default MyButton
+export default MyButton;
