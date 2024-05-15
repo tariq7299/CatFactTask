@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 import './CreatFactsForm.scss'
-import MyButton from '../../components/common/MyButton/MyButton';
+import MyButton from '../common/MyButton/MyButton';
 
 const CreateFactsForm = ({setNewFactAdded}) => {
 
     const { getToken } = useAuth() 
     const token = getToken()
+
     
   const [formData, setFormData] = useState({
     newCatFact: '',

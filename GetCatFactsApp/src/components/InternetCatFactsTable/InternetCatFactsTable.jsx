@@ -1,14 +1,64 @@
 import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
 import './InternetCatFactsTable.scss'
+import { ProgressBar } from 'react-loader-spinner'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import MyButton from '../common/MyButton/MyButton';
 
-const InternetCatFactsTable = ({ internetCatFacts }) => {
+const InternetCatFactsTable = () => {
+  const [internetCatFacts, setInternetCatFacts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoadingInternetFacts, setIsLoadingInternetFacts] = useState(false)
+  const [isErrorFetchingInternetCatFacts, setIsErrorFetchingInternetCatFacts] = useState(false);
+  
+  useEffect(() => {
 
- 
+    const fetchInternetCatFacts = async () => {
+        setIsErrorFetchingInternetCatFacts(false);
+        setIsLoadingInternetFacts(true);
+        try {
+            const response = await axios.get(`https://catfact.ninja/facts?page=${currentPage}&max_length=70`);
+
+              // Simulate a delay of 0.6 seconds
+              setInternetCatFacts(response.data)
+              const loadingTimer = setTimeout(() => {
+                setIsLoadingInternetFacts(false);
+            }, 600);
+
+            return () => clearTimeout(loadingTimer);
+            
+        } catch (error) {
+            setIsErrorFetchingInternetCatFacts(true);
+            console.error('Error fetching data:', error)
+        }
+
+        setIsLoadingInternetFacts(false);
+    
+    };
+
+    fetchInternetCatFacts();
+  
+  
+}, [currentPage]);
+
+
+const handlePrevPage = () => {
+  if (internetCatFacts.prev_page_url ) {
+      setCurrentPage(currentPage - 1);
+  }
+};
+
+const handleNextPage = () => {
+  if (internetCatFacts.next_page_url) {
+      setCurrentPage(currentPage + 1);
+  }
+};
+
   
   const internetCatFactsWithIds = useMemo(() => {
-    if (!internetCatFacts) return [];
-    return internetCatFacts.map((row, index) => ({ ...row, id: index + 1 }));
+    if (!internetCatFacts.data) return [];
+    return internetCatFacts.data.map((row, index) => ({ ...row, id: index + 1 }));
   }, [internetCatFacts]);
 
   const tableCustomStyles = {
@@ -46,11 +96,40 @@ const InternetCatFactsTable = ({ internetCatFacts }) => {
  
   
     return (
-      <DataTable
+      <div className='Internetfacts-table-container'>
+
+      <h1> Here are some Cat facts from the internet</h1>
+
+      {isErrorFetchingInternetCatFacts ? <div className='error-message'>Error fetching Internet Cat Facts !!! Please contact support !</div> : isLoadingInternetFacts ? (
+          <div className='progress-bar-container'>     <ProgressBar
+          visible={true}
+          height="80"
+          width="80"
+          barColor="#fff"
+          borderColor="#ffda6a"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          /></div>
+
+) : ( <>
+
+<DataTable
         columns={columns}
         data={internetCatFactsWithIds}
         customStyles={tableCustomStyles}
       />
+
+<div className='pagination-buttons-container'>
+          <MyButton handleOnClick={handleNextPage} isDisabled={!internetCatFacts.next_page_url} text="Previous" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
+
+          <MyButton handleOnClick={handlePrevPage} isDisabled={!internetCatFacts.prev_page_url} text="Next" buttonColor="secondary-color" textColor="primary-font-color"></MyButton>
+          
+      </div></>)}
+
+      
+  </div>
+      
     )
   }
 

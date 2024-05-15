@@ -16,7 +16,6 @@ const usersCatFacts = [
   {factId: 2, owner: 'hassan', catFact: 'Another fake cat fact!!'},
 ]
 
-
 const secretKey = 'CAT-FACTS-VERY-SECRET';
 app.use(express.json());
 app.use(cors());
@@ -48,13 +47,6 @@ app.post('/api/login', (req, res) => {
 
   res.json({ token, userData });
 });
-
-function generateToken(userId) {
-  const hash = crypto.createHmac('sha256', secretKey)
-    .update(userId.toString())
-    .digest('hex');
-  return hash;
-}
 
 app.get("/api/facts", (req, res) => {
   
@@ -97,7 +89,6 @@ try{
 
 });
 
-
 function authenticateToken(req, res, next) {
 
   // console.log("reqINAUTHENTICATE-----TOKE", req)
@@ -129,8 +120,12 @@ function authenticateToken(req, res, next) {
   next();
 }
 
-
-
+function generateToken(userId) {
+  const hash = crypto.createHmac('sha256', secretKey)
+    .update(userId.toString())
+    .digest('hex');
+  return hash;
+}
 
 app.listen(PORT, () => {
   console.log(`Cat server is runnng on ${PORT}`);
