@@ -45,24 +45,27 @@ form.login-form {
   .form_control {
     padding-bottom: 1rem;
     width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center; 
 
     label {
       font-size: 2rem;
-      display: block;
       padding-bottom: 0.25rem;
+      width: 100%;
+      max-width: 450px;
     }
     input[type='text'],
     input[type='password'] {
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
       padding: 0.5em;
-    //   margin-inline: auto;
       border: 1px solid #ddd;
       border-radius: 4px;
     }
   }
   button {
-    // margin-top: 1rem;
     max-width: 400px;
   }
 }
