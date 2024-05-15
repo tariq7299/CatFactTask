@@ -65,7 +65,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       name: 'User',
       selector: (row) => row.owner,
       sortable: true,
-      width: '80px',
+      width: '85px',
       cell: (row) => <div className="custom-font">{row.owner}</div>,
     },
     {

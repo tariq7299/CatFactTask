@@ -12,8 +12,13 @@ const users = [
 ];
 
 const usersCatFacts = [
-  {factId: 1, owner: 'tariq', catFact: 'This a fake cat fact !'},
-  {factId: 2, owner: 'hassan', catFact: 'Another fake cat fact!!'},
+  {factId: 1, owner: 'Tariq', catFact: 'This a fake cat fact !'},
+  {factId: 2, owner: 'Hassan', catFact: 'Another fake cat fact!!'},
+  {factId: 3, owner: 'Karim', catFact: 'Cats like to swim 🌊'},
+  {factId: 4, owner: 'Ahmed', catFact: 'Did you know that cats love playing with dolphines 🐬'},
+  {factId: 5, owner: 'Sara', catFact: 'Girls dont like cats 🗿'},
+  {factId: 6, owner: 'Hassan', catFact: 'I am tired of comping up with those stupid facts'},
+  {factId: 7, owner: 'Tariq', catFact: 'please like my website 🐸'},
 ]
 
 const secretKey = 'CAT-FACTS-VERY-SECRET';

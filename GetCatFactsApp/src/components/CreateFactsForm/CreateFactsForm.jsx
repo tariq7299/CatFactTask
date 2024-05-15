@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 import './CreatFactsForm.scss';
 import MyButton from '../common/MyButton/MyButton';
@@ -12,7 +12,10 @@ import { useNavigate } from 'react-router-dom';
 // Implement Responsive design
 const CreateFactsForm = ({ setNewFactAdded }) => {
   const { getToken } = useAuth();
-  const token = getToken();
+  const token = useMemo(() => {
+    return getToken();
+  }, [getToken]);
+
   const { alerts, addAlert } = useAlert();
   const navigate = useNavigate();
 

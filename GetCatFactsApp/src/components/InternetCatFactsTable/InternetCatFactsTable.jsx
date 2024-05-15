@@ -83,7 +83,7 @@ const InternetCatFactsTable = () => {
       name: 'ID',
       selector: (row) => row.id,
       sortable: true,
-      width: '80px',
+      width: '85px',
       cell: (row) => <div className="custom-font">{row.id}</div>,
     },
     {
