@@ -94,7 +94,7 @@ try{
 });
 
 // DELETE /api/facts/:factId
-app.delete('/api/facts/:factId', (req, res) => {
+app.delete('/api/facts/:factId', authenticateToken,  (req, res) => {
 
   console.log("req.params", req.params)
   const catFactId = parseInt(req.params.factId);

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useAlert } from '../../hooks/AlertProvider';
+import { useNavigate } from 'react-router-dom';
 
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
@@ -17,6 +18,8 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
   }, [getToken]);
 
   const { alerts, addAlert } = useAlert();
+
+  const navigate = useNavigate();
 
   const [usersCatFacts, setUsersCatFacts] = useState([]);
 
@@ -84,6 +87,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       } catch (error) {
         if (error.response && error.response.status === 401) {
           // Redirect to login page or handle unauthorized access
+          console.error('User UnAuthorized ... redirecting to login page');
           navigate('/login');
         } else {
           // Handle other errors (e.g., show an error message)
