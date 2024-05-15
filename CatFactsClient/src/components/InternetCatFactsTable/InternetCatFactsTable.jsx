@@ -92,6 +92,7 @@ const InternetCatFactsTable = () => {
       sortable: true,
       cell: (row) => <div className="custom-font">{row.fact}</div>,
     },
+   
   ];
 
   return (

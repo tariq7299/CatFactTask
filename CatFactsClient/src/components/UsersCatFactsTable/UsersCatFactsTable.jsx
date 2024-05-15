@@ -4,8 +4,20 @@ import './UsersCatFactsTable.scss';
 import { ProgressBar } from 'react-loader-spinner';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../hooks/AuthProvider';
+import { useAlert } from '../../hooks/AlertProvider';
 
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
+
+  const { getToken } = useAuth();
+  
+
+  const token = useMemo(() => {
+    return getToken();
+  }, [getToken]);
+
+  const { alerts, addAlert } = useAlert();
+
   const [usersCatFacts, setUsersCatFacts] = useState([]);
 
   const [isLoadingUsersFacts, setIsLoadingUsersFacts] = useState(false);
@@ -17,14 +29,13 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
       try {
-        // TASK #1 : Fetch data from an API
-        // Use Axios
-        // Handle errors
         const response = await axios.get('http://localhost:3000/api/facts');
+
+        
 
         setUsersCatFacts(response.data);
         // Simulate a delay of 0.6 seconds
-        setIsLoadingUsersFacts(response.data);
+        setIsLoadingUsersFacts(true);
 
         const loadingTimer = setTimeout(() => {
           setIsLoadingUsersFacts(false);
@@ -43,6 +54,51 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     setNewFactAdded(false);
   }, [newFactAdded]);
 
+
+  function handleDeletUserCatFact (factId) {
+
+    const deletUserCatFact = async () => {
+      try {
+
+        console.log(factId)
+
+ 
+        const response = await axios.delete(`http://localhost:3000/api/facts/${factId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log("usersFactsBeforeUpdating", usersCatFacts)
+        if (response.status === 200 || response.status === 204) {
+          addAlert('Cat Fact Deleted 👍', 'success')
+           
+          setUsersCatFacts(usersCatFacts.filter(fact => fact.id !== factId));
+          
+          
+        } else {
+          throw new Error();
+        }
+      
+       
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          // Redirect to login page or handle unauthorized access
+          navigate('/login');
+        } else {
+          // Handle other errors (e.g., show an error message)
+          console.error('Something bad happened! Please contact support.');
+          addAlert('Something bad happened ! Please contact support !', 'danger');
+        }
+      }
+      
+
+    };
+
+    deletUserCatFact()
+   
+    
+  }
 
 
   const tableCustomStyles = {
@@ -73,6 +129,12 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       selector: (row) => row.catFact,
       sortable: true,
       cell: (row) => <div className="custom-font">{row.catFact}</div>,
+    },
+    {
+      name: 'Action',
+      cell: (row) => <div className="custom-font"><button onClick={() => {
+        handleDeletUserCatFact(row.factId)
+      }}>Delete</button></div>,
     },
   ];
 

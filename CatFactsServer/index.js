@@ -93,6 +93,29 @@ try{
 
 });
 
+// DELETE /api/facts/:factId
+app.delete('/api/facts/:factId', (req, res) => {
+
+  console.log("req.params", req.params)
+  const catFactId = parseInt(req.params.factId);
+  console.log("catFactId", catFactId)
+  
+  // Find the index of the value to delete
+  const catFactIndex = usersCatFacts.findIndex((catFact) => catFact.factId === catFactId);
+  console.log("catFactIndex", catFactIndex)
+  
+  if (catFactIndex !== -1) {
+    console.log("catFactIndex", catFactIndex)
+    // Remove the value from the array
+    usersCatFacts.splice(catFactIndex, 1);
+    console.log("usersCatFacts", usersCatFacts)
+    res.sendStatus(204); // No Content
+  } else {
+    res.status(404).json({ error: 'Value not found' });
+  }
+});
+
+
 function authenticateToken(req, res, next) {
 
   console.log("HEYEYEYE")
