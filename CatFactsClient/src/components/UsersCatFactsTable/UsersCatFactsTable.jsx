@@ -7,11 +7,13 @@ import axios from 'axios';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useAlert } from '../../hooks/AlertProvider';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
   const { getToken , getUserData } = useAuth();
   
+  const { register, handleSubmit, errors, reset } = useForm();
 
 
   const token = useMemo(() => {
@@ -39,8 +41,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       setIsLoadingUsersFacts(true);
       try {
         const response = await axios.get('http://localhost:3000/api/facts');
-
-        
 
         setUsersCatFacts(response.data);
         // Simulate a delay of 0.6 seconds
@@ -111,6 +111,18 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
   }
 
 
+  function handleEditCatFact(factId) {
+    console.log("usersCatFacts", usersCatFacts)
+    setUsersCatFacts(usersCatFacts.map((userFact) => {
+        if (userFact.factId === factId)  {
+            // console.log("post.editMode", userFact.editMode)
+            return {...userFact, editMode: !userFact.editMode ?? true}
+        } else {
+            return userFact;
+        }
+    }))
+  }
+
   const tableCustomStyles = {
     headCells: {
       style: {
@@ -138,16 +150,33 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       name: 'Fact',
       selector: (row) => row.catFact,
       sortable: true,
-      cell: (row) => <div className="custom-font">{row.catFact}</div>,
+      cell: (row) => (
+        <div className="custom-font">
+          {row.editMode ? (
+            <textarea type="text"
+            id={`user-cat-fact-${row.id}`}
+            name={`user-cat-fact-${row.id}`}
+            defaultValue={row.catFact} // Use defaultValue for initial value
+            {...register(`user-cat-fact-${row.id}`)}
+            ></textarea>
+          ) : (
+            <>{row.catFact}</>
+          )}
+        </div>
+      ),
     },
     {
       name: 'Action',
       cell: (row) => (
         <div className="custom-font">
           {row.owner.toLowerCase() === username ? (
-            <button onClick={() => handleDeletUserCatFact(row.factId)}>
-              Delete
-            </button>
+            <><button onClick={() => handleDeletUserCatFact(row.factId)}>
+            Delete
+          </button>
+          <button onClick={() => handleEditCatFact(row.factId)}>
+          {row.editMode ? "exit" : "edit"}
+        </button> {row.editMode && <button>save</button>}</>
+            
           ) : (
             ''
           )}
