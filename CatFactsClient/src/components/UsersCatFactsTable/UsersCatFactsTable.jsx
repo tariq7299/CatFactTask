@@ -22,8 +22,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
         // Handle errors
         const response = await axios.get('http://localhost:3000/api/facts');
 
-        console.log('response', response);
-
         setUsersCatFacts(response.data);
         // Simulate a delay of 0.6 seconds
         setIsLoadingUsersFacts(response.data);

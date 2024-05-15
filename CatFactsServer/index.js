@@ -70,10 +70,12 @@ try{
   const username  = req.username;
   const {newCatFact} = req.body;
 
+
   const catFactsIds = usersCatFacts.map((fact) => fact.factId);
       
   const highestId = catFactsIds.length > 0 ? Math.max(...catFactsIds) : 0;
   const newId = highestId + 1;
+
 
   const newFact = {factId: newId, owner: username, catFact: newCatFact}
 
@@ -94,10 +96,8 @@ function authenticateToken(req, res, next) {
   if (!token || !tokenStorage[token]) {
     return res.status(401).json({ message: 'Invalid token' });
   }
-
   const userId = tokenStorage[token];
   const user = users.find(u => u.id === userId);
-
   if (!user) {
     return res.status(401).json({ message: 'Invalid token' });
   }

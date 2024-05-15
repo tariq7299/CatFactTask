@@ -44,7 +44,6 @@ function AuthProvider({ children }) {
       localStorage.setItem('userData', res.userData.username);
       navigate('/');
     } catch (err) {
-      console.error(err);
       addAlert('username/password is wrong ⛔', 'danger');
     }
   }
