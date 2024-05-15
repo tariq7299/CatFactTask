@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthProvider';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import { ProgressBar } from 'react-loader-spinner';
+import './PrivateRoute.scss'
 
 const PrivateRoute = () => {
   const { checkIfAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -30,7 +32,18 @@ const PrivateRoute = () => {
 
   if (isLoading) {
     // Render a loading state (e.g., spinner, loading message)
-    return <div>Loading...</div>;
+    return <div>   <div className="progress-bar-container-private-route">
+    <ProgressBar
+      visible={true}
+      height="80"
+      width="80"
+      barColor="#fff"
+      borderColor="#ffda6a"
+      ariaLabel="progress-bar-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+    />
+  </div></div>;
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;

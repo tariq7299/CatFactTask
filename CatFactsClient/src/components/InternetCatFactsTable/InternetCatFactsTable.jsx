@@ -104,7 +104,6 @@ const InternetCatFactsTable = () => {
         </div>
       ) : isLoadingInternetFacts ? (
         <div className="progress-bar-container">
-          {' '}
           <ProgressBar
             visible={true}
             height="80"
