@@ -6,7 +6,6 @@ import MyButton from '../../components/common/MyButton/MyButton';
 import MyAlert from '../../components/common/MyAlert/MyAlert';
 import { useAlert } from '../../hooks/AlertProvider';
 
-
 //  TASK #4 : Manage app state using Context API and CRUD operations
 //                     Use CRUD operatins
 //                     Implement Responsive design
@@ -21,7 +20,6 @@ export default function Login() {
   const auth = useAuth();
 
   const handleSubmitEvent = (e) => {
-    
     e.preventDefault();
     if (input.username !== '' && input.password !== '') {
       auth.logIn(input);

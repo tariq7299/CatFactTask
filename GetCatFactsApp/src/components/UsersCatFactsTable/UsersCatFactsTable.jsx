@@ -17,9 +17,9 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
       try {
-          // TASK #1 : Fetch data from an API
-          // Use Axios
-          // Handle errors
+        // TASK #1 : Fetch data from an API
+        // Use Axios
+        // Handle errors
         const response = await axios.get('http://localhost:3000/api/facts');
 
         console.log('response', response);
@@ -57,9 +57,9 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     },
   };
 
-                  // TASK #3 : Display Data using React Data Table Compoenet
-                    // Use Sorting, filtring, and paginatation in the table
-                    // Use React Data Table Component
+  // TASK #3 : Display Data using React Data Table Compoenet
+  // Use Sorting, filtring, and paginatation in the table
+  // Use React Data Table Component
   const columns = [
     {
       name: 'User',
@@ -99,7 +99,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
           />
         </div>
       ) : (
-
         <DataTable
           columns={columns}
           data={usersCatFacts}

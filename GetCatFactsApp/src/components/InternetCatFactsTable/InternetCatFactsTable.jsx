@@ -19,8 +19,8 @@ const InternetCatFactsTable = () => {
       setIsLoadingInternetFacts(true);
       try {
         // TASK #1 : Fetch data from an API
-          // Use Axios
-          // Handle errors
+        // Use Axios
+        // Handle errors
         const response = await axios.get(
           `https://catfact.ninja/facts?page=${currentPage}&max_length=70`
         );
@@ -75,10 +75,9 @@ const InternetCatFactsTable = () => {
     },
   };
 
-
-               // TASK #3 : Display Data using React Data Table Compoenet
-                    // Use Sorting, filtring, and paginatation in the table
-                    // Use React Data Table Component
+  // TASK #3 : Display Data using React Data Table Compoenet
+  // Use Sorting, filtring, and paginatation in the table
+  // Use React Data Table Component
   const columns = [
     {
       name: 'ID',

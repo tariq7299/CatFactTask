@@ -7,11 +7,9 @@ import MyAlert from '../common/MyAlert/MyAlert';
 import { useAlert } from '../../hooks/AlertProvider';
 import { useNavigate } from 'react-router-dom';
 
-
-
-      // TASK #4 : Manage app state using Context API and CRUD operations
-                    // Use CRUD operatins
-                    // Implement Responsive design
+// TASK #4 : Manage app state using Context API and CRUD operations
+// Use CRUD operatins
+// Implement Responsive design
 const CreateFactsForm = ({ setNewFactAdded }) => {
   const { getToken } = useAuth();
   const token = getToken();
@@ -58,7 +56,6 @@ const CreateFactsForm = ({ setNewFactAdded }) => {
       } else {
         addAlert('Something bad happened ! Please contact support !', 'danger');
       }
-
     }
 
     setFormData({
