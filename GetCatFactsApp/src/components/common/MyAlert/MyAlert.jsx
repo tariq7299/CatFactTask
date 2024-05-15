@@ -7,7 +7,7 @@ const MyAlert = ({ index }) => {
   const { message, variant } = alerts[index]
 
   return (
-      <Alert variant={variant} onClose={() => removeAlert(index)} dismissible>
+      <Alert className='custom-font' variant={variant} onClose={() => removeAlert(index)} dismissible>
       {message}
         </Alert>
   )

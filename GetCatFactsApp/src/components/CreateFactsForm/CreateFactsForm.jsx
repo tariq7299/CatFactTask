@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 import './CreatFactsForm.scss'
 import MyButton from '../common/MyButton/MyButton';
+import MyAlert from '../common/MyAlert/MyAlert';
+import { useAlert } from '../../hooks/AlertProvider';
 
 const CreateFactsForm = ({setNewFactAdded}) => {
 
     const { getToken } = useAuth() 
     const token = getToken()
+    const { alerts, addAlert } = useAlert();
 
     
   const [formData, setFormData] = useState({
@@ -34,14 +37,15 @@ const CreateFactsForm = ({setNewFactAdded}) => {
         });
       
         if (response.status === 200 || response.status === 201) {
-          alert("catfact added successfully!");
+          addAlert('Your Cat fact was added successfully !!', 'success');
+    
         } else {
           throw new Error();
         }
       } catch (error) {
         console.error(error);
         alert("Something bad happened");
-        
+
     }
 
     setFormData({
@@ -54,6 +58,10 @@ const CreateFactsForm = ({setNewFactAdded}) => {
   return (
 
     <form className='add-fact-form' onSubmit={handleSubmitingNewFact}>
+      
+      {alerts.map((_, index) => (
+        <MyAlert key={index} index={index} />
+      ))}
       <div className='add-fact-form-elements-container'>
         <label htmlFor="inputField">Enter your cat fact</label>
         <input

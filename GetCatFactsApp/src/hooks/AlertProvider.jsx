@@ -12,6 +12,9 @@ const AlertProvider = ({ children }) => {
   };
 
   const removeAlert = (index) => {
+    console.log("alerts", alerts)
+    console.log("alerts__index", index)
+
     setAlerts(alerts.filter((_, i) => i !== index));
   };
 
