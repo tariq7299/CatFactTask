@@ -51,7 +51,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     };
 
     fetchUsersCatFacts();
-    setNewFactAdded(false);
   }, [newFactAdded]);
 
 
@@ -74,6 +73,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
           addAlert('Cat Fact Deleted 👍', 'success')
            
           setUsersCatFacts(usersCatFacts.filter(fact => fact.id !== factId));
+          setNewFactAdded(!newFactAdded);
           
           
         } else {

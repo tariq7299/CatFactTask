@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 // TASK #4 : Manage app state using Context API and CRUD operations
 // Use CRUD operatins
 // Implement Responsive design
-const CreateFactsForm = ({ setNewFactAdded }) => {
+const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
   const { getToken } = useAuth();
 
   const token = useMemo(() => {
@@ -40,7 +40,7 @@ const CreateFactsForm = ({ setNewFactAdded }) => {
     // Handle success (e.g., show a success message)
     addAlert('Cat Fact Added 👍', 'success')
     reset()
-    setNewFactAdded(true);
+    setNewFactAdded(!newFactAdded);
   } else {
     throw new Error();
   }

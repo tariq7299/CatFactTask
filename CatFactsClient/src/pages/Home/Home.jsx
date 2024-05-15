@@ -36,7 +36,7 @@ function Home() {
 
         <div className="add-new-fact-container">
           <h1>You can also add your own facts ! Try it 👇</h1>
-          <CreateFactsForm setNewFactAdded={setNewFactAdded}></CreateFactsForm>
+          <CreateFactsForm newFactAdded={newFactAdded} setNewFactAdded={setNewFactAdded}></CreateFactsForm>
         </div>
 
         <div className="footer">
