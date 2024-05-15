@@ -25,6 +25,11 @@ const secretKey = 'CAT-FACTS-VERY-SECRET';
 app.use(express.json());
 app.use(cors());
 
+app.get('/api/isAuthenticated', authenticateToken, (req, res) => {
+  console.log("HEYEYEYE");
+  res.json({ isAuthenticated: true });
+});
+
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });
 });
@@ -89,6 +94,8 @@ try{
 });
 
 function authenticateToken(req, res, next) {
+
+  console.log("HEYEYEYE")
 
   const token = req.headers.authorization?.split(' ')[1];
   

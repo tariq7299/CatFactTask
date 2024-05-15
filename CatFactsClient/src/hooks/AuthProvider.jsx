@@ -21,10 +21,37 @@ function AuthProvider({ children }) {
     return localStorage.getItem('userData');
   }
   
-  function checkIfAuthenticated() {
-    const storedToken = Cookies.get('token');
-    return storedToken ? true : false;
-  }
+  // function checkIfAuthenticated() {
+  //   const storedToken = Cookies.get('token');
+  //   return storedToken ? true : false;
+  // }
+
+  // Function to check if the user is authenticated
+  async function checkIfAuthenticated() {
+    const token = Cookies.get('token');
+
+    try {
+      const response = await axios.get('http://localhost:3000/api/isAuthenticated', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+       if(response.data.isAuthenticated) {
+          return true
+       } else {
+        return false
+       }
+
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        return false
+      } else {
+        // Handle other errors (e.g., network issues)
+        console.error('Error checking authentication:', error);
+        return false
+      }
+    }
+  };
   
   async function logIn(loginData) {
     try {
