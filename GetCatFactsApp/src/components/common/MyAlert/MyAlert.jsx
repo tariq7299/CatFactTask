@@ -2,12 +2,12 @@
 import { useAlert } from '../../../hooks/AlertProvider'
 import Alert from 'react-bootstrap/Alert'
 
-const MyAlert = ({ index }) => {
+const MyAlert = ({ index, alertId }) => {
   const { alerts, removeAlert } = useAlert()
   const { message, variant } = alerts[index]
 
   return (
-      <Alert className='custom-font' variant={variant} onClose={() => removeAlert(index)} dismissible>
+      <Alert key={index} className='custom-font' variant={variant} onClose={() => removeAlert(alertId)} dismissible>
       {message}
         </Alert>
   )

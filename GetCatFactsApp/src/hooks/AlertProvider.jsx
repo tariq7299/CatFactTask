@@ -1,5 +1,6 @@
 // src/AlertContext.js
 import React, { createContext, useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const AlertContext = createContext();
 
@@ -8,15 +9,14 @@ const AlertProvider = ({ children }) => {
   const [alerts, setAlerts] = useState([]);
 
   const addAlert = (message, variant) => {
-    setAlerts([...alerts, { message, variant }]);
+    const id = uuidv4();
+    setAlerts([...alerts, { id, message, variant }]);
   };
 
-  const removeAlert = (index) => {
-    console.log("alerts", alerts)
-    console.log("alerts__index", index)
-
-    setAlerts(alerts.filter((_, i) => i !== index));
+  const removeAlert = (idToRemove) => {
+    setAlerts(alerts.filter((alert) => alert.id !== idToRemove));
   };
+
 
   return (
     <AlertContext.Provider value={{ alerts, addAlert, removeAlert }}>

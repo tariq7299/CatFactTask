@@ -46,8 +46,8 @@ export default function Login() {
         <ResponsiveCat></ResponsiveCat>
         </div>
  
-        {alerts.map((_, index) => (
-        <MyAlert key={index} index={index} />
+        {alerts.map((alert, index) => (
+        <MyAlert key={alert.id} index={index} alertId={alert.id} />
       ))}
         <form className="login-form" onSubmit={handleSubmitEvent}>
           <div className="form_control">
