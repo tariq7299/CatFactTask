@@ -58,9 +58,9 @@ const CreateFactsForm = ({setNewFactAdded}) => {
   return (
 
     <form className='add-fact-form' onSubmit={handleSubmitingNewFact}>
-      
-      {alerts.map((_, index) => (
-        <MyAlert key={index} index={index} />
+ 
+ {alerts.map((alert, index) => (
+        <MyAlert key={alert.id} index={index} alertId={alert.id} />
       ))}
       <div className='add-fact-form-elements-container'>
         <label htmlFor="inputField">Enter your cat fact</label>
