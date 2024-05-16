@@ -26,7 +26,6 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/api/isAuthenticated', authenticateToken, (req, res) => {
-  console.log("HEYEYEYE");
   res.json({ isAuthenticated: true });
 });
 
@@ -96,45 +95,26 @@ try{
 // DELETE /api/facts/:factId
 app.delete('/api/facts/:factId', authenticateToken,  (req, res) => {
 
-  console.log("req.params", req.params)
   const catFactId = parseInt(req.params.factId);
-  console.log("catFactId", catFactId)
   
-  // Find the index of the value to delete
   const catFactIndex = usersCatFacts.findIndex((catFact) => catFact.factId === catFactId);
-  console.log("catFactIndex", catFactIndex)
   
-  if (catFactIndex !== -1) {
-    console.log("catFactIndex", catFactIndex)
-    // Remove the value from the array
-    usersCatFacts.splice(catFactIndex, 1);
-    console.log("usersCatFacts", usersCatFacts)
-    res.sendStatus(204); // No Content
+  if (catFactIndex !== -1) {    
+    usersCatFacts.splice(catFactIndex, 1);    res.sendStatus(204); 
   } else {
     res.status(404).json({ error: 'Value not found' });
   }
 });
 
 app.put('/api/facts/:factId', authenticateToken,  (req, res) => {
-
-  console.log("req.params", req.params)
-  const catFactId = parseInt(req.params.factId);
-  console.log("catFactId", catFactId)
-  console.log("req.body", req.body)
-  
-  const {updatedCatFact} = req.body;
-  console.log("updatedNewCatFact", updatedCatFact)
-  
+  const catFactId = parseInt(req.params.factId);  
+  const {updatedCatFact} = req.body;  
   // Find the index of the value to delete
 
   const factToUpdate = usersCatFacts.find((fact) => fact.factId === catFactId);
   if (factToUpdate) {
-    factToUpdate.catFact = updatedCatFact;
-    console.log(`Updated cat fact with ID ${catFactId}: ${updatedCatFact}`);
-    res.sendStatus(204); // No Content
-  } else {
-    console.log(`Cat fact with ID ${factId} not found.`);
-    res.status(404).json({ error: 'Value not found' });
+    factToUpdate.catFact = updatedCatFact;    res.sendStatus(204); 
+  } else {    res.status(404).json({ error: 'Value not found' });
   }
   
   
@@ -142,8 +122,6 @@ app.put('/api/facts/:factId', authenticateToken,  (req, res) => {
 
 
 function authenticateToken(req, res, next) {
-
-  console.log("HEYEYEYE")
 
   const token = req.headers.authorization?.split(' ')[1];
   
@@ -169,6 +147,4 @@ function generateToken(userId) {
   return hash;
 }
 
-app.listen(PORT, () => {
-  console.log(`Cat server is runnng on ${PORT}`);
-});
+app.listen(PORT, () => {});

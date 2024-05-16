@@ -1,9 +1,9 @@
 // src/components/Alert.js
 import { useAlert } from '../../../hooks/AlertProvider';
 import Alert from 'react-bootstrap/Alert';
-import './MyAlert.scss';
+import './CatAlert.scss';
 
-const MyAlert = ({ index, alertId }) => {
+const CatAlert = ({ index, alertId }) => {
   const { alerts, removeAlert } = useAlert();
   const { message, variant } = alerts[index];
 
@@ -21,4 +21,4 @@ const MyAlert = ({ index, alertId }) => {
   );
 };
 
-export default MyAlert;
+export default CatAlert;

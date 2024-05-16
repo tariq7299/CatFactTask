@@ -4,15 +4,23 @@ import './InternetCatFactsTable.scss';
 import { ProgressBar } from 'react-loader-spinner';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import MyButton from '../common/MyButton/MyButton';
+import CatButton from '../common/CatButton/CatButton';
 
 const InternetCatFactsTable = () => {
+  // This for the actula facts fetched from the public API
   const [internetCatFacts, setInternetCatFacts] = useState([]);
+
+  // This to keep track for the page beng shown to user ! so it is used for pagination purposes
   const [currentPage, setCurrentPage] = useState(1);
+
+  // This will show a loading indecator
   const [isLoadingInternetFacts, setIsLoadingInternetFacts] = useState(false);
+
+  // If error when fetching the facts !, so this will make me show an error message instead of the actual table
   const [isErrorFetchingInternetCatFacts, setIsErrorFetchingInternetCatFacts] =
     useState(false);
 
+    // Fetching facts from the public api
   useEffect(() => {
     const fetchInternetCatFacts = async () => {
       setIsErrorFetchingInternetCatFacts(false);
@@ -26,12 +34,14 @@ const InternetCatFactsTable = () => {
         );
 
         // Simulate a delay of 0.6 seconds
+        // This will make the UX much better
         setInternetCatFacts(response.data);
         const loadingTimer = setTimeout(() => {
           setIsLoadingInternetFacts(false);
         }, 600);
 
         return () => clearTimeout(loadingTimer);
+
       } catch (error) {
         setIsErrorFetchingInternetCatFacts(true);
         console.error('Error fetching data:', error);
@@ -43,18 +53,21 @@ const InternetCatFactsTable = () => {
     fetchInternetCatFacts();
   }, [currentPage]);
 
+  // THis will handle the previous page button
   const handlePrevPage = () => {
     if (internetCatFacts.prev_page_url) {
       setCurrentPage(currentPage - 1);
     }
   };
 
+  // This will handle the next page button
   const handleNextPage = () => {
     if (internetCatFacts.next_page_url) {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  // THis will cache the fetched facts for better performance
   const internetCatFactsWithIds = useMemo(() => {
     if (!internetCatFacts.data) return [];
     return internetCatFacts.data.map((row, index) => ({
@@ -63,6 +76,7 @@ const InternetCatFactsTable = () => {
     }));
   }, [internetCatFacts]);
 
+  // THis will apply my custom css/styles to the table headers
   const tableCustomStyles = {
     headCells: {
       style: {
@@ -102,6 +116,10 @@ const InternetCatFactsTable = () => {
         internet!
       </h1>
 
+      {/* If error then show only error
+          If loaind so show only loadin
+          If not Error nor Loading then finally show the actual table wiht the fetched data
+      */}
       {isErrorFetchingInternetCatFacts ? (
         <div className="error-message">
           Error fetching Internet Cat Facts !!! Please contact support !
@@ -127,18 +145,18 @@ const InternetCatFactsTable = () => {
             customStyles={tableCustomStyles}
           />
 
+          {/* THe pagination buttons */}
           <div className="pagination-buttons-container">
-            <MyButton
+            <CatButton
               handleOnClick={handleNextPage}
               isDisabled={!internetCatFacts.next_page_url}
               text="Previous"
-            ></MyButton>
-
-            <MyButton
+            ></CatButton>
+            <CatButton
               handleOnClick={handlePrevPage}
               isDisabled={!internetCatFacts.prev_page_url}
               text="Next"
-            ></MyButton>
+            ></CatButton>
           </div>
         </>
       )}

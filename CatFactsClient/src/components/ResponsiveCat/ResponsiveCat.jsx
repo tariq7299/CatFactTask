@@ -1,5 +1,6 @@
 import './ResponsiveCat.scss';
 
+// THis is the blenking cat at the log in page
 function ResponsiveCat() {
   return (
     <div className="cat">

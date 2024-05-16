@@ -1,6 +1,6 @@
-import './MyButton.scss';
+import './CatButton.scss';
 
-function MyButton({ text, handleOnClick, isDisabled }) {
+function CatButton({ text, handleOnClick, isDisabled }) {
   return (
     <div className="cat-button">
       <button
@@ -14,4 +14,4 @@ function MyButton({ text, handleOnClick, isDisabled }) {
   );
 }
 
-export default MyButton;
+export default CatButton;

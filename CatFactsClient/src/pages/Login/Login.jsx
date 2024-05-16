@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 import './Login.scss';
 import ResponsiveCat from '../../components/ResponsiveCat/ResponsiveCat';
-import MyButton from '../../components/common/MyButton/MyButton';
-import MyAlert from '../../components/common/MyAlert/MyAlert';
+import CatButton from '../../components/common/CatButton/CatButton';
+import CatAlert from '../../components/common/CatAlert/CatAlert';
 import { useAlert } from '../../hooks/AlertProvider';
 import { useForm } from 'react-hook-form';
 
@@ -30,7 +30,7 @@ export default function Login() {
       </div>
       <div className="alerts-wrapper">
         {alerts.map((alert, index) => (
-          <MyAlert key={alert.id} index={index} alertId={alert.id} />
+          <CatAlert key={alert.id} index={index} alertId={alert.id} />
         ))}
       </div>
 
@@ -40,12 +40,12 @@ export default function Login() {
           <input
             type="text"
             id="user-username"
-            name="username"
+          name="username"
             placeholder="catman99..."
             {...register('username', { required: 'Username is required' })}
             autoComplete="current-username"
           />
-          {errors?.username && addAlert('errors.username.message', 'danger')}
+          {errors?.username && <span className="inputs-erros-message ">{errors.username.message}</span>}
         </div>
         <div className="form_control">
           <label htmlFor="password">Pawsitive Passcode🔒</label>
@@ -57,15 +57,15 @@ export default function Login() {
             {...register('password', { required: 'Password is required' })}
             autoComplete="current-password"
           />
-          {errors?.password && addAlert('errors.password.message', 'danger')}
+          {errors?.password && <span className="inputs-erros-message ">{errors.password.message}</span>}
         </div>
         <div className="get-started-button-wrapper">
           <div className="cat-button get-started-button">
             <div className=" get-started-button">
-              <MyButton
+              <CatButton
                 className="cat-button get-started-button"
                 text="Lets Goo❕"
-              ></MyButton>
+              ></CatButton>
             </div>
           </div>
         </div>

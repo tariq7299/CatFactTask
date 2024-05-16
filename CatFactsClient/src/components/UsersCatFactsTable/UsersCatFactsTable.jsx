@@ -13,10 +13,11 @@ import PencilIcon from '../common/Icons/PencilIcon';
 import TrashIcon from '../common/Icons/TrashIcon';
 import SaveIcon from '../common/Icons/SaveIcon';
 
+// THis the second table where it will show the cat facts users added to the site, so it is not from a public API and instead it is from my server and DB
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
   const { getToken, getUserData } = useAuth();
 
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const token = useMemo(() => {
     return getToken();
@@ -26,7 +27,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     return getUserData();
   }, [getUserData]);
 
-  const { alerts, addAlert } = useAlert();
+  const { addAlert } = useAlert();
 
   const navigate = useNavigate();
 
@@ -63,6 +64,8 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     fetchUsersCatFacts();
   }, [newFactAdded]);
 
+  // THis funcion will handle when users click on the delete button to try to delete a fact !
+  // It will send DELETE request to server with the fact ID
   const handleDeletUserCatFact = async (factId) => {
     try {
 
@@ -108,7 +111,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     );
   }
 
-  const onSubmit = async (data, factId) => {
+  const handleSubmittingUpdatedFact = async (data, factId) => {
     try {
       reset();
       // Extract the value of the textarea with the key corresponding to the factId
@@ -134,9 +137,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
         }
       );
 
-      // Check the response status and handle accordingly
       if (response.status === 200 || response.status === 204) {
-        // Update the UI or perform any necessary actions
         addAlert('Cat Fact updated 👍', 'info');
         setNewFactAdded(!newFactAdded);
       } else {
@@ -144,7 +145,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
         throw new Error();
       }
     } catch (error) {
-      // Handle errors
       if (error.response && error.response.status === 401) {
         // Redirect to login page or handle unauthorized access
         console.error('User Unauthorized ... redirecting to login page');
@@ -219,7 +219,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
               </button>{' '}
               {row.editMode && (
                 <button
-                  onClick={handleSubmit((data) => onSubmit(data, row.factId))}
+                  onClick={handleSubmit((data) => handleSubmittingUpdatedFact(data, row.factId))}
                 >
                   <SaveIcon />
                 </button>
