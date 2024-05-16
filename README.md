@@ -19,7 +19,7 @@ D. Enable users to edit/delete there facts that they add before
 ### To start the app in production just do the following  
 
 #### Cat Server (Backend)  
-1. Head to `CatFactsServer` folder then install all the dependencies  
+1. Head to `catNipServer` folder then install all the dependencies  
 ```bash  
 npm install
 ```    
@@ -30,7 +30,7 @@ npm start
 
 #### Cat Client (Frontend)
 
-1. Head to `CatFactsClient` folder then install all the dependencies  
+1. Head to `catNipClient` folder then install all the dependencies  
 ```bash  
 npm install
 ```    
@@ -49,7 +49,7 @@ Now you can head to the url that will appear, usually it is `http://localhost:41
 
 
 #### Cat Server (Backend)  
-1. Head to `CatFactsServer` folder then install all the dependencies  
+1. Head to `catNipServer` folder then install all the dependencies  
 ```bash  
 npm install
 ```    
@@ -60,7 +60,7 @@ npm start
 
 #### Cat Client (Frontend)
 
-1. Head to `CatFactsClient` folder then install all the dependencies  
+1. Head to `catNipClient` folder then install all the dependencies  
 ```bash  
 npm install
 ```    
@@ -100,6 +100,7 @@ Finally if you go again to the second table of users cat facts you can edit your
 - All buttons have a very nice hover and active effects  
 - Cute and responsive cat at the login page  
 - After you log in you will be greatd by your name at the top !
+- Works really really well on mobile (and looks even better!, Try it ! you can see how it looks using chrome dev tools)
 - And the most impressive feature yet !!!.........THAT THIS WEBSITE HAVE THE MOST CUTTING EDGE CAT FACTS YOU WILL EVER SEE   
 
 
