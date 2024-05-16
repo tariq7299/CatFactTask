@@ -66,8 +66,6 @@ export default function Login() {
       <MyButton
           className="cat-button get-started-button"
           text="Lets Goo!"
-          buttonColor="secondary-color"
-          textColor="primary-font-color"
         ></MyButton>
         </div>
   </div>

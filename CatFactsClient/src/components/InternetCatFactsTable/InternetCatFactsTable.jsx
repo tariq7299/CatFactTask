@@ -129,16 +129,12 @@ const InternetCatFactsTable = () => {
               handleOnClick={handleNextPage}
               isDisabled={!internetCatFacts.next_page_url}
               text="Previous"
-              buttonColor="secondary-color"
-              textColor="primary-font-color"
             ></MyButton>
 
             <MyButton
               handleOnClick={handlePrevPage}
               isDisabled={!internetCatFacts.prev_page_url}
               text="Next"
-              buttonColor="secondary-color"
-              textColor="primary-font-color"
             ></MyButton>
           </div>
         </>

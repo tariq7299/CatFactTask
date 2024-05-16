@@ -1,11 +1,11 @@
 import './MyButton.scss';
 
-function MyButton({ text, buttonColor, textColor, handleOnClick, isDisabled }) {
+function MyButton({ text, handleOnClick, isDisabled }) {
   return (
 
     <div className="cat-button">
     <button
-      className={`action-button ${textColor} ${buttonColor}`}
+      className={`action-button`}
       onClick={handleOnClick}
       disabled={isDisabled}
     >

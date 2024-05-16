@@ -6,9 +6,7 @@ import UsersCatFactsTable from '../../components/UsersCatFactsTable/UsersCatFact
 import CreateFactsForm from '../../components/CreateFactsForm/CreateFactsForm';
 import { useAuth } from '../../hooks/AuthProvider';
 import './Home.scss';
-import MyButton from '../../components/common/MyButton/MyButton';
-import { ProgressBar } from 'react-loader-spinner';
-import { Emoji } from 'react-emoji';
+import CatButtonLogOut from '../../components/common/CatButtonLogOut/CatButtonLogOut';
 
 function Home() {
   const { logOut, getUserData } = useAuth();
@@ -42,14 +40,12 @@ function Home() {
 
         <div className="footer">
           <p>Proudly made by TQ</p>
-          <MyButton
-            buttonColor="secondary-color"
-            textColor="red"
+          <CatButtonLogOut
             text="Exit 😿"
             handleOnClick={handleLogout}
           >
             GoodBye
-          </MyButton>
+          </CatButtonLogOut>
         </div>
       </div>
     </div>

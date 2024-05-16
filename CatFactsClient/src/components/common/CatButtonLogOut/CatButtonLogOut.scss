@@ -1,18 +1,18 @@
 @import './../../../_variables.scss';
 
-.cat-button {
+.cat-button-logout {
   position: relative;
   display: inline-block;
   transform-style: preserve-3d; /* Add this line to fix blurry text */
 }
 
-.cat-button button {
+.cat-button-logout button {
   color: $color-black;
   font-weight: bold;
   font-size: 24px;
   text-align: center;
   text-decoration: none;
-  background-color: $accent-color;
+  background-color: red;
   display: block;
   position: relative;
   padding: 10px 20px;
@@ -23,23 +23,23 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
   border: none;
-  box-shadow: 0 6px 0 #915100, 0 12px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 0 #380a05, 0 12px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease-in-out;
   transform: translateY(0);
 }
 
-.cat-button button:hover {
+.cat-button-logout button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 0 #915100, 0 14px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 0 #710c0c, 0 14px 12px rgba(0, 0, 0, 0.4);
 }
 
-.cat-button button:active {
+.cat-button-logout button:active {
   top: 4px;
-  background-color: #F78900;
-  box-shadow: 0 2px 0 #915100, 0 6px 6px rgba(0, 0, 0, 0.3);
+  background-color: #710c0c;
+  box-shadow: 0 2px 0 #230603, 0 6px 6px rgba(0, 0, 0, 0.3);
 }
 
-.cat-button:after {
+.cat-button-logout:after {
   content: "";
   height: 100%;
   width: 100%;
@@ -54,7 +54,7 @@
   border-radius: 5px;
 }
 
-.cat-button button:disabled {
+.cat-button-logout button:disabled {
   color: $disabled-text-color;
   background-color: $disabled-bg-color;
   box-shadow: none;
@@ -62,6 +62,6 @@
   transform: none;
 }
 
-.cat-button button:disabled:hover {
+.cat-button-logout button:disabled:hover {
   box-shadow: none;
 }

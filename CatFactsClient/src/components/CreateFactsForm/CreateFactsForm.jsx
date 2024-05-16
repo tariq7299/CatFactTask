@@ -78,8 +78,6 @@ return (
       {errors?.newCatFact && addAlert("errors.newCatFact.message", 'danger')}
        <MyButton
           text="Add Fact"
-          buttonColor="secondary-color"
-          textColor="primary-font-color"
         ></MyButton>
     </div>
   </form>
