@@ -61,12 +61,18 @@ export default function Login() {
         {errors?.password && addAlert("errors.password.message", 'danger')}
       </div>
       <div className="get-started-button-wrapper">
+      <div className="cat-button get-started-button">
+      <div className=" get-started-button">
       <MyButton
-          className="get-started-button"
+          className="cat-button get-started-button"
           text="Lets Goo!"
           buttonColor="secondary-color"
           textColor="primary-font-color"
         ></MyButton>
+        </div>
+  </div>
+   
+
       </div>
     </form>
     </div>

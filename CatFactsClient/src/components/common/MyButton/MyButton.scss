@@ -1,24 +1,78 @@
 @import './../../../_variables.scss';
 
-.action-button {
-  padding: 0.5rem 3rem;
-  border: black 1px solid;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 1.5rem;
-
+.cat-button {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d; /* Add this line to fix blurry text */
 }
 
-.hover-effect:hover{
-    background-color: $color-black;
-    border-color: $secondary-color;
-    color: $color-white;
+.cat-button button {
+  color: $color-black;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  background-color: $accent-color;
+  display: block;
+  position: relative;
+  padding: 10px 20px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=#000, offx=0px, offy=1px);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 6px 0 #915100, 0 12px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+  transform: translateY(0);
+}
+.cat-button button {
+  color: $color-black;
+  background-color: $accent-color;
 }
 
-.secondary-color {
-  background-color: $secondary-color;
+.cat-button button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 #915100, 0 14px 12px rgba(0, 0, 0, 0.4);
 }
 
-.red {
-  background-color: rgb(193, 25, 25);
+.cat-button button:active {
+  top: 4px;
+  background-color: #F78900;
+  box-shadow: 0 2px 0 #915100, 0 6px 6px rgba(0, 0, 0, 0.3);
+}
+
+// .cat-button button:active {
+//   top: 4px;
+//   background-color: #F78900;
+//   box-shadow: 0 2px 0 #915100, 0 6px 6px rgba(0, 0, 0, 0.3);
+// }
+
+
+.cat-button:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  position: absolute;
+  bottom: -15px;
+  left: -4px;
+  z-index: -1;
+  background-color: #9d968d;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.cat-button button:disabled {
+  color: $disabled-text-color;
+  background-color: $disabled-bg-color;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cat-button button:disabled:hover {
+  box-shadow: none;
 }
