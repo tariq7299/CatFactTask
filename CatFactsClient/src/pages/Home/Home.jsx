@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import InternetCatFactsTable from '../../components/InternetCatFactsTable/InternetCatFactsTable';
@@ -35,15 +34,15 @@ function Home() {
 
         <div className="add-new-fact-container">
           <h1>You can also add your own facts ! Try it 👇</h1>
-          <CreateFactsForm newFactAdded={newFactAdded} setNewFactAdded={setNewFactAdded}></CreateFactsForm>
+          <CreateFactsForm
+            newFactAdded={newFactAdded}
+            setNewFactAdded={setNewFactAdded}
+          ></CreateFactsForm>
         </div>
 
         <div className="footer">
           <p>Proudly made by TQ</p>
-          <CatButtonLogOut
-            text="Exit 😿"
-            handleOnClick={handleLogout}
-          >
+          <CatButtonLogOut text="Exit 😿" handleOnClick={handleLogout}>
             GoodBye
           </CatButtonLogOut>
         </div>

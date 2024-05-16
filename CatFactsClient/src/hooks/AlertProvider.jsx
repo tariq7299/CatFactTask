@@ -11,16 +11,24 @@ const AlertProvider = ({ children }) => {
 
   const addAlert = (message, variant) => {
     const id = uuidv4();
-    setAlerts([...alerts, { id, message, variant }]);
+    const timeoutId = setTimeout(() => {
+      removeAlert(id);
+    }, 2000);
+
+    setAlerts([...alerts, { id, message, variant, timeoutId }]);
   };
 
   const removeAlert = (idToRemove) => {
-    setAlerts(alerts.filter((alert) => alert.id !== idToRemove));
+    setAlerts((prevAlerts) =>
+      prevAlerts.filter((alert) => {
+        if (alert.id === idToRemove) {
+          clearTimeout(alert.timeoutId);
+          return false;
+        }
+        return true;
+      })
+    );
   };
-
-  useEffect(() => {
-    setAlerts([]);
-  }, [location]);
 
   return (
     <AlertContext.Provider value={{ alerts, addAlert, removeAlert }}>

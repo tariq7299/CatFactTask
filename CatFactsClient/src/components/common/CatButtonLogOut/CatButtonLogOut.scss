@@ -23,24 +23,30 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
   border: none;
-  box-shadow: 0 6px 0 #380a05, 0 12px 10px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 6px 0 #380a05,
+    0 12px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease-in-out;
   transform: translateY(0);
 }
 
 .cat-button-logout button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 0 #710c0c, 0 14px 12px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 8px 0 #710c0c,
+    0 14px 12px rgba(0, 0, 0, 0.4);
 }
 
 .cat-button-logout button:active {
   top: 4px;
   background-color: #710c0c;
-  box-shadow: 0 2px 0 #230603, 0 6px 6px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 2px 0 #230603,
+    0 6px 6px rgba(0, 0, 0, 0.3);
 }
 
 .cat-button-logout:after {
-  content: "";
+  content: '';
   height: 100%;
   width: 100%;
   padding: 4px;

@@ -92,12 +92,15 @@ const InternetCatFactsTable = () => {
       sortable: true,
       cell: (row) => <div className="custom-font">{row.fact}</div>,
     },
-   
   ];
 
   return (
     <div className="Internetfacts-table-container">
-      <h1> Get Ready to Paws 🐾 Here Are Some Whisker-tastic Cat Facts from the internet!</h1>
+      <h1>
+        {' '}
+        Get Ready to Paws 🐾 Here Are Some Whisker-tastic Cat Facts from the
+        internet!
+      </h1>
 
       {isErrorFetchingInternetCatFacts ? (
         <div className="error-message">

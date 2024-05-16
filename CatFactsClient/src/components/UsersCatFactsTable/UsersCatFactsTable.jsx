@@ -13,14 +13,10 @@ import PencilIcon from '../common/Icons/PencilIcon';
 import TrashIcon from '../common/Icons/TrashIcon';
 import SaveIcon from '../common/Icons/SaveIcon';
 
-
-
 const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
+  const { getToken, getUserData } = useAuth();
 
-  const { getToken , getUserData } = useAuth();
-  
   const { register, handleSubmit, errors, reset } = useForm();
-
 
   const token = useMemo(() => {
     return getToken();
@@ -29,7 +25,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
   const username = useMemo(() => {
     return getUserData();
   }, [getUserData]);
-  console.log("username", username)
 
   const { alerts, addAlert } = useAlert();
 
@@ -68,89 +63,81 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
     fetchUsersCatFacts();
   }, [newFactAdded]);
 
-
   const handleDeletUserCatFact = async (factId) => {
+    try {
 
-      try {
-
-        console.log(factId)
-
- 
-        const response = await axios.delete(`http://localhost:3000/api/facts/${factId}`, {
+      const response = await axios.delete(
+        `http://localhost:3000/api/facts/${factId}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        }
+      );
 
-        console.log("usersFactsBeforeUpdating", usersCatFacts)
-        if (response.status === 200 || response.status === 204) {
-          addAlert('Cat Fact Deleted 👍', 'success')
-           
-          setUsersCatFacts(usersCatFacts.filter(fact => fact.id !== factId));
-          setNewFactAdded(!newFactAdded);
-          
-          
-        } else {
-          throw new Error();
-        }
-      
-       
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          // Redirect to login page or handle unauthorized access
-          console.error('User UnAuthorized ... redirecting to login page');
-          navigate('/login');
-        } else {
-          // Handle other errors (e.g., show an error message)
-          console.error('Something bad happened! Please contact support.');
-          addAlert('Something bad happened ! Please contact support !', 'danger');
-        }
+      if (response.status === 200 || response.status === 204) {
+        addAlert('Cat Fact Deleted ❗️', 'warning');
+
+        setUsersCatFacts(usersCatFacts.filter((fact) => fact.id !== factId));
+        setNewFactAdded(!newFactAdded);
+      } else {
+        throw new Error();
       }
-      
-
-   
-    
-  }
-
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page or handle unauthorized access
+        console.error('User UnAuthorized ... redirecting to login page');
+        navigate('/login');
+      } else {
+        // Handle other errors (e.g., show an error message)
+        console.error('Something bad happened! Please contact support.');
+        addAlert('Something bad happened ! Please contact support !', 'danger');
+      }
+    }
+  };
 
   function handleEditCatFact(factId) {
-    console.log("usersCatFacts", usersCatFacts)
-    setUsersCatFacts(usersCatFacts.map((userFact) => {
-        if (userFact.factId === factId)  {
-            // console.log("post.editMode", userFact.editMode)
-            return {...userFact, editMode: !userFact.editMode ?? true}
+    setUsersCatFacts(
+      usersCatFacts.map((userFact) => {
+        if (userFact.factId === factId) {
+          return { ...userFact, editMode: !userFact.editMode ?? true };
         } else {
-            return userFact;
+          return userFact;
         }
-    }))
+      })
+    );
   }
 
   const onSubmit = async (data, factId) => {
     try {
-      reset()
+      reset();
       // Extract the value of the textarea with the key corresponding to the factId
       const updatedCatFact = data[`user-cat-fact-${factId}`];
-  
+
       // If the updatedCatFact is not found, return early
       if (!updatedCatFact) {
         return;
       }
-  
+
       // Prepare the data to be sent in the PUT request
       const requestData = { updatedCatFact };
-  
+
       // Make the PUT request to update the cat fact
-      const response = await axios.put(`http://localhost:3000/api/facts/${factId}`, requestData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+      const response = await axios.put(
+        `http://localhost:3000/api/facts/${factId}`,
+        requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
-  
+      );
+
       // Check the response status and handle accordingly
       if (response.status === 200 || response.status === 204) {
         // Update the UI or perform any necessary actions
-        addAlert('Cat Fact updated 👍', 'success');
+        addAlert('Cat Fact updated 👍', 'info');
         setNewFactAdded(!newFactAdded);
       } else {
         // Throw an error if the response status is unexpected
@@ -169,7 +156,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       }
     }
   };
-
 
   const tableCustomStyles = {
     headCells: {
@@ -192,7 +178,11 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       selector: (row) => row.owner,
       sortable: true,
       width: '85px',
-      cell: (row) => <div className="row-owner-wrapper custom-font">{row.owner.toLowerCase() === username ? <span>Me</span> : row.owner}</div>,
+      cell: (row) => (
+        <div className="row-owner-wrapper custom-font">
+          {row.owner.toLowerCase() === username ? <span>Me</span> : row.owner}
+        </div>
+      ),
     },
     {
       name: 'Fact',
@@ -201,11 +191,12 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       cell: (row) => (
         <div className="custom-font">
           {row.editMode ? (
-            <textarea type="text"
-            id={`user-cat-fact-${row.factId}`}
-            name={`user-cat-fact-${row.factId}`}
-            defaultValue={row.catFact}
-            {...register(`user-cat-fact-${row.factId}`, { required: true })}
+            <textarea
+              type="text"
+              id={`user-cat-fact-${row.factId}`}
+              name={`user-cat-fact-${row.factId}`}
+              defaultValue={row.catFact}
+              {...register(`user-cat-fact-${row.factId}`, { required: true })}
             ></textarea>
           ) : (
             <>{row.catFact}</>
@@ -219,13 +210,21 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       cell: (row) => (
         <div className="icon-button-container custom-font">
           {row.owner.toLowerCase() === username ? (
-            <><button onClick={() => handleDeletUserCatFact(row.factId)}>
-           <TrashIcon/>
-          </button>
-          <button onClick={() => handleEditCatFact(row.factId)}>
-          {row.editMode ? <ExitIcon/> : <PencilIcon/>}
-        </button> {row.editMode && <button  onClick={handleSubmit((data) =>onSubmit(data, row.factId))}><SaveIcon/></button>}</>
-            
+            <>
+              <button onClick={() => handleDeletUserCatFact(row.factId)}>
+                <TrashIcon />
+              </button>
+              <button onClick={() => handleEditCatFact(row.factId)}>
+                {row.editMode ? <ExitIcon /> : <PencilIcon />}
+              </button>{' '}
+              {row.editMode && (
+                <button
+                  onClick={handleSubmit((data) => onSubmit(data, row.factId))}
+                >
+                  <SaveIcon />
+                </button>
+              )}
+            </>
           ) : (
             ''
           )}
@@ -236,7 +235,11 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
   return (
     <div className="users-cat-facts-table-container">
-      <h1> Want more Paw-some Adventure?<br></br> Dive into Our User-Generated Cat Facts! 🙋 </h1>
+      <h1>
+        {' '}
+        Want more Paw-some Adventure?<br></br> Dive into Our User-Generated Cat
+        Facts! 🙋{' '}
+      </h1>
 
       {isErrorFetchingUsersCatFacts ? (
         <div className="error-message">

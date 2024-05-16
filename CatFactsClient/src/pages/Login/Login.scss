@@ -1,6 +1,5 @@
 @import './../../variables';
 
-
 .parent-container {
   display: flex;
   flex-flow: column nowrap;
@@ -27,14 +26,13 @@
 }
 
 @media (min-width: 768px) {
-    .header-container {
-     padding-top: 5rem;
-    }
+  .header-container {
+    padding-top: 5rem;
   }
-  
+}
 
 form.login-form {
-  padding: 0 0 0rem 0 ;
+  padding: 0 0 0rem 0;
   width: 100%;
   max-width: 600px;
   display: flex;
@@ -48,7 +46,7 @@ form.login-form {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 
     label {
       font-size: 2rem;

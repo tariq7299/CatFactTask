@@ -12,15 +12,13 @@ function AuthProvider({ children }) {
 
   function getToken() {
     const testToken = Cookies.get('token');
-    console.log("testToken", testToken)
-
     return testToken;
   }
-  
+
   function getUserData() {
     return localStorage.getItem('userData');
   }
-  
+
   // function checkIfAuthenticated() {
   //   const storedToken = Cookies.get('token');
   //   return storedToken ? true : false;
@@ -31,45 +29,52 @@ function AuthProvider({ children }) {
     const token = Cookies.get('token');
 
     try {
-      const response = await axios.get('http://localhost:3000/api/isAuthenticated', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-       if(response.data.isAuthenticated) {
-          return true
-       } else {
-        return false
-       }
-
+      const response = await axios.get(
+        'http://localhost:3000/api/isAuthenticated',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.isAuthenticated) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        return false
+        addAlert('Unathorized access please log in first !!', 'danger');
+        return false;
       } else {
         // Handle other errors (e.g., network issues)
         console.error('Error checking authentication:', error);
-        return false
+        return false;
       }
     }
-  };
-  
+  }
+
   async function logIn(loginData) {
     try {
       // TASK #1: Fetch data from an API
       // Use Axios
       // Handle errors
-      const response = await axios.post('http://localhost:3000/api/login', loginData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
+      const response = await axios.post(
+        'http://localhost:3000/api/login',
+        loginData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
       const res = response.data;
-  
+
       if (!res.userData) {
         throw new Error(res.message);
       }
-  
+
       Cookies.set('token', res.token);
       localStorage.setItem('userData', res.userData.username);
       navigate('/');
@@ -77,13 +82,13 @@ function AuthProvider({ children }) {
       addAlert('username/password is wrong ⛔', 'danger');
     }
   }
-  
+
   function logOut() {
     localStorage.removeItem('userData');
     Cookies.remove('token');
     navigate('/login');
   }
-  
+
   return (
     <AuthContext.Provider
       value={{ getToken, checkIfAuthenticated, logIn, logOut, getUserData }}

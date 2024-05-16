@@ -1,4 +1,4 @@
-@import "./../../variables";
+@import './../../variables';
 
 .users-cat-facts-table-container {
   min-width: 330px;
@@ -11,13 +11,13 @@
   textarea {
     width: 100%;
     resize: vertical;
-    padding: 10px; 
-    font-size: 14px; 
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 4px; 
-    min-height: 90px; 
+    border-radius: 4px;
+    min-height: 90px;
   }
-  
+
   .progress-bar-container {
     display: flex;
     justify-content: center;
@@ -26,34 +26,33 @@
     min-height: 290px;
   }
 
-  .row-owner-wrapper{ 
+  .row-owner-wrapper {
     span {
       font-weight: 600;
-      color: $accent-color
+      color: $accent-color;
     }
   }
 
   .icon-button-container {
-    
-       button {
-         border: none;
-         background: none;
-         padding: 7px;
-         cursor: pointer;
-        //  color: blue;
-      }
-      .bi-pencil-fill, .bi-x-circle{
-        color: $accent-color;
-      }
-      .bi-floppy2-fill{
-        color: rgb(29, 102, 29);
-      }
+    button {
+      border: none;
+      background: none;
+      padding: 7px;
+      cursor: pointer;
+      //  color: blue;
+    }
+    .bi-pencil-fill,
+    .bi-x-circle {
+      color: $accent-color;
+    }
+    .bi-floppy2-fill {
+      color: rgb(29, 102, 29);
+    }
   }
-      .bi-trash3{
-        color: rgb(151, 22, 22);
-      }
+  .bi-trash3 {
+    color: rgb(151, 22, 22);
   }
-
+}
 
 @media (min-width: 768px) {
   .users-cat-facts-table-container {
