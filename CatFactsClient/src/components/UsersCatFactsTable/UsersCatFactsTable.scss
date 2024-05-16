@@ -6,6 +6,17 @@
   h1 {
     text-align: center;
   }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 10px; 
+    font-size: 14px; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    min-height: 90px; 
+  }
+  
   .progress-bar-container {
     display: flex;
     justify-content: center;
@@ -22,7 +33,7 @@
          cursor: pointer;
         //  color: blue;
       }
-      .bi-pencil-fill, .bi-x{
+      .bi-pencil-fill, .bi-x-circle{
         color: $accent-color;
       }
       .bi-floppy2-fill{
