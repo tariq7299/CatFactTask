@@ -148,13 +148,13 @@ const InternetCatFactsTable = () => {
           {/* THe pagination buttons */}
           <div className="pagination-buttons-container">
             <CatButton
-              handleOnClick={handleNextPage}
-              isDisabled={!internetCatFacts.next_page_url}
+              handleOnClick={handlePrevPage}
+              isDisabled={!internetCatFacts.prev_page_url}
               text="Previous"
             ></CatButton>
             <CatButton
-              handleOnClick={handlePrevPage}
-              isDisabled={!internetCatFacts.prev_page_url}
+              handleOnClick={handleNextPage}
+              isDisabled={!internetCatFacts.next_page_url}
               text="Next"
             ></CatButton>
           </div>
