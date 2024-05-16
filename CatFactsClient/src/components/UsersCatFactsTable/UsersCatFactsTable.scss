@@ -1,3 +1,5 @@
+@import "./../../variables";
+
 .users-cat-facts-table-container {
   min-width: 330px;
   max-width: 350px;
@@ -11,7 +13,27 @@
     min-width: 330px;
     min-height: 290px;
   }
-}
+  .icon-button-container {
+    
+       button {
+         border: none;
+         background: none;
+         padding: 7px;
+         cursor: pointer;
+        //  color: blue;
+      }
+      .bi-pencil-fill, .bi-x{
+        color: $accent-color;
+      }
+      .bi-floppy2-fill{
+        color: rgb(29, 102, 29);
+      }
+  }
+      .bi-trash3{
+        color: rgb(151, 22, 22);
+      }
+  }
+
 
 @media (min-width: 768px) {
   .users-cat-facts-table-container {
