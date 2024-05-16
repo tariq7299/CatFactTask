@@ -18,8 +18,7 @@ function Home() {
   }
 
   return (
-    <div>
-      <div>
+      <div className='home-page-parent-container'>
         <h1 className="greeting-header">
           Hello 👋 😸 <span>{username}</span> !
         </h1>
@@ -47,7 +46,6 @@ function Home() {
           </CatButtonLogOut>
         </div>
       </div>
-    </div>
   );
 }
 

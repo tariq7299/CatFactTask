@@ -72,8 +72,8 @@ const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
       </div>
 
       <div className="add-fact-form-elements-container">
-        <label htmlFor="inputField">Enter your cat fact</label>
-        <input
+        {/* <label htmlFor="inputField">Enter your cat fact</label> */}
+        <textarea
           type="text"
           id="inputField"
           name="newCatFact"

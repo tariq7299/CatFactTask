@@ -66,7 +66,7 @@ const InternetCatFactsTable = () => {
   const tableCustomStyles = {
     headCells: {
       style: {
-        fontSize: '20px',
+        fontSize: '28px',
         fontWeight: 'bold',
         paddingLeft: '0 8px',
         justifyContent: 'center',
