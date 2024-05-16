@@ -22,7 +22,7 @@ function Home() {
     <div>
       <div>
         <h1 className="greeting-header">
-          Hello 👋 😺 <span>{username}</span> !
+          Hello 👋 😸 <span>{username}</span> !
         </h1>
 
         <div className="tables-container">

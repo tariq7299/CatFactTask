@@ -192,7 +192,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       selector: (row) => row.owner,
       sortable: true,
       width: '85px',
-      cell: (row) => <div className="custom-font">{row.owner}</div>,
+      cell: (row) => <div className="row-owner-wrapper custom-font">{row.owner.toLowerCase() === username ? <span>Me</span> : row.owner}</div>,
     },
     {
       name: 'Fact',
@@ -236,7 +236,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
   return (
     <div className="users-cat-facts-table-container">
-      <h1> Here are users 🙋 Cat Facts </h1>
+      <h1> Want more Paw-some Adventure?<br></br> Dive into Our User-Generated Cat Facts! 🙋 </h1>
 
       {isErrorFetchingUsersCatFacts ? (
         <div className="error-message">

@@ -26,7 +26,7 @@ export default function Login() {
 
     <div className="parent-container">
     <div className="header-container">
-      <h1>Wellcome to my <br></br><span>Cat Facts</span> <br></br>WebSite </h1>
+      <h1>Welcome to the<br></br><span>Catnip Club</span></h1>
       <ResponsiveCat></ResponsiveCat>
     </div>
 
@@ -36,7 +36,7 @@ export default function Login() {
       
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="form_control">
-        <label htmlFor="user-username">Username</label>
+        <label htmlFor="user-username">Whisker-worthy Username</label>
         <input
           type="text"
           id="user-username"
@@ -49,7 +49,7 @@ export default function Login() {
         
       </div>
       <div className="form_control">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Pawsitive Passcode🔒</label>
         <input
           type="password"
           id="password"
@@ -65,7 +65,7 @@ export default function Login() {
       <div className=" get-started-button">
       <MyButton
           className="cat-button get-started-button"
-          text="Lets Goo!"
+          text="Lets Goo❕"
         ></MyButton>
         </div>
   </div>

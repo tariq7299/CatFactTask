@@ -5,6 +5,7 @@
   max-width: 350px;
   h1 {
     text-align: center;
+    font-size: 3rem;
   }
 
   textarea {
@@ -24,6 +25,14 @@
     min-width: 330px;
     min-height: 290px;
   }
+
+  .row-owner-wrapper{ 
+    span {
+
+      color: $accent-color
+    }
+  }
+
   .icon-button-container {
     
        button {

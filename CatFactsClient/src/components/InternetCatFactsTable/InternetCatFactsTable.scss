@@ -4,11 +4,17 @@
 
   h1 {
     text-align: center;
+    font-size: 3rem;
   }
   .pagination-buttons-container {
     padding: 1rem 0;
     text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    justify-content: center;
   }
+  
   .progress-bar-container {
     display: flex;
     justify-content: center;

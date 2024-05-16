@@ -97,7 +97,7 @@ const InternetCatFactsTable = () => {
 
   return (
     <div className="Internetfacts-table-container">
-      <h1> Here are some Cat facts 💯 from the internet</h1>
+      <h1> Get Ready to Paws 🐾 Here Are Some Whisker-tastic Cat Facts from the internet!</h1>
 
       {isErrorFetchingInternetCatFacts ? (
         <div className="error-message">
