@@ -63,9 +63,8 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
   }, [newFactAdded]);
 
 
-  function handleDeletUserCatFact (factId) {
+  const handleDeletUserCatFact = async (factId) => {
 
-    const deletUserCatFact = async () => {
       try {
 
         console.log(factId)
@@ -103,9 +102,6 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       }
       
 
-    };
-
-    deletUserCatFact()
    
     
   }
@@ -122,6 +118,52 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
         }
     }))
   }
+
+  const onSubmit = async (data, factId) => {
+    try {
+      reset()
+      // Extract the value of the textarea with the key corresponding to the factId
+      const updatedCatFact = data[`user-cat-fact-${factId}`];
+  
+      // If the updatedCatFact is not found, return early
+      if (!updatedCatFact) {
+        return;
+      }
+  
+      // Prepare the data to be sent in the PUT request
+      const requestData = { updatedCatFact };
+  
+      // Make the PUT request to update the cat fact
+      const response = await axios.put(`http://localhost:3000/api/facts/${factId}`, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      // Check the response status and handle accordingly
+      if (response.status === 200 || response.status === 204) {
+        // Update the UI or perform any necessary actions
+        addAlert('Cat Fact updated 👍', 'success');
+        setNewFactAdded(!newFactAdded);
+      } else {
+        // Throw an error if the response status is unexpected
+        throw new Error();
+      }
+    } catch (error) {
+      // Handle errors
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page or handle unauthorized access
+        console.error('User Unauthorized ... redirecting to login page');
+        navigate('/login');
+      } else {
+        // Handle other errors (e.g., show an error message)
+        console.error('Something bad happened! Please contact support.');
+        addAlert('Something bad happened! Please contact support!', 'danger');
+      }
+    }
+  };
+
 
   const tableCustomStyles = {
     headCells: {
@@ -154,10 +196,10 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
         <div className="custom-font">
           {row.editMode ? (
             <textarea type="text"
-            id={`user-cat-fact-${row.id}`}
-            name={`user-cat-fact-${row.id}`}
-            defaultValue={row.catFact} // Use defaultValue for initial value
-            {...register(`user-cat-fact-${row.id}`)}
+            id={`user-cat-fact-${row.factId}`}
+            name={`user-cat-fact-${row.factId}`}
+            defaultValue={row.catFact}
+            {...register(`user-cat-fact-${row.factId}`, { required: true })}
             ></textarea>
           ) : (
             <>{row.catFact}</>
@@ -175,7 +217,7 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
           </button>
           <button onClick={() => handleEditCatFact(row.factId)}>
           {row.editMode ? "exit" : "edit"}
-        </button> {row.editMode && <button>save</button>}</>
+        </button> {row.editMode && <button onClick={handleSubmit((data) =>onSubmit(data, row.factId))}>save</button>}</>
             
           ) : (
             ''

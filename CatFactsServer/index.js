@@ -115,6 +115,31 @@ app.delete('/api/facts/:factId', authenticateToken,  (req, res) => {
   }
 });
 
+app.put('/api/facts/:factId', authenticateToken,  (req, res) => {
+
+  console.log("req.params", req.params)
+  const catFactId = parseInt(req.params.factId);
+  console.log("catFactId", catFactId)
+  console.log("req.body", req.body)
+  
+  const {updatedCatFact} = req.body;
+  console.log("updatedNewCatFact", updatedCatFact)
+  
+  // Find the index of the value to delete
+
+  const factToUpdate = usersCatFacts.find((fact) => fact.factId === catFactId);
+  if (factToUpdate) {
+    factToUpdate.catFact = updatedCatFact;
+    console.log(`Updated cat fact with ID ${catFactId}: ${updatedCatFact}`);
+    res.sendStatus(204); // No Content
+  } else {
+    console.log(`Cat fact with ID ${factId} not found.`);
+    res.status(404).json({ error: 'Value not found' });
+  }
+  
+  
+});
+
 
 function authenticateToken(req, res, next) {
 
