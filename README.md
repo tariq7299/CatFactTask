@@ -2,9 +2,9 @@
 
 # CatNip Clup  
 **This application do the follwoing:**  
-A. Enable users to see facts about cats form the internet (via this api [catfact.ninja](https://catfact.ninja/))  
-B. Enable users to see other users genereted facts
-C. Enable Users to add there own facts so other users can see it  
+A. Enable users to see facts about cats form the internet (via this api [catfact.ninja](https://catfact.ninja/))    
+B. Enable users to see other users genereted facts  
+C. Enable Users to add there own facts so other users can see it    
 D. Enable users to edit/delete there facts that they add before  
 
 ## Table of Contents
