@@ -126,7 +126,9 @@ app.put('/api/facts/:factId', authenticateToken,  (req, res) => {
 
 function authenticateToken(req, res, next) {
 
+  
   const token = req.headers.authorization?.split(' ')[1];
+  console.log("token", token)
 
   if (!token || !tokenStorage[token]) {
     return res.status(401).json({ message: 'Invalid token' });
@@ -154,9 +156,9 @@ app.post('/api/logout', authenticateToken, (req, res) => {
 
   const token = req.headers.authorization?.split(' ')[1];
 
+  console.log("token", token)
   delete tokenStorage[token];
 
-  console.log()
 
   res.status(200).json({ message: 'You have been loged out successfully !' });
 });

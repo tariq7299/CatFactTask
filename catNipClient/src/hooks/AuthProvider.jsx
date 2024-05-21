@@ -78,8 +78,8 @@ function AuthProvider({ children }) {
       Cookies.set('token', res.token);
       localStorage.setItem('userData', res.userData.username);
       navigate('/');
-    } catch (err) {
-      addAlert('username/password is wrong ⛔', 'danger');
+    } catch (error) {
+      errorHandler(error, addAlert, navigate)
     }
   }
 

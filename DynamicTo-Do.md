@@ -1,25 +1,10 @@
 **Use better error handling better axios**
-    -   Create a helper folder
-    - Use axios instance to with a base url and header 
-    -   Use it in creating, updating, deleting, fetching usersCatfacts, fetching Internet cat facts
-    - Create a error handling function to be used every where (you pass in response, then it outputs the app)
-        - Add error handling function to creating new fact
-        - Add error handling to updating new fact
-        - Add error handling to deleting new fact  
-
-    - Remove the token from cookies when user is unAuthenticated()
-    - And fix unauthorized CRUD operations
-    - Add error handling to logout and login functions
-
-        - Find a way to handle incorrect username or password
-            
-
-
-    - Replace the login and logout requests with axios instances
+  
 
     - Use http-only cookies  
     - Remove the getToken() function from authProvider.jsx hook
     - Chnage name of axiosInstances file to something better
+    - Fix wronge logout alert
 
 # Questions
 1. How to use useAut() in axiosInstances.jsx ? like it show this error !:
@@ -31,7 +16,7 @@ AuthProvider.jsx:103 Warning: Invalid hook call. Hooks can only be called inside
 3. You might have more than one copy of React in the same app
 See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
 ```
-
+2. How to replace the login in axios funciton in AuthProvider ??
 
 
 

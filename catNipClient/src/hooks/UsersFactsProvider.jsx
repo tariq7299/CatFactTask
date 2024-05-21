@@ -4,6 +4,7 @@ import { usersCatApiInstance } from '../helper/axiosInstances';
 
 const UsersFactsContext = createContext();
 
+
 const UsersFactsProvider = ({ children }) => {
   const [usersCatFacts, setUsersCatFacts] = useState([]);
 
@@ -11,12 +12,13 @@ const UsersFactsProvider = ({ children }) => {
   const [isErrorFetchingUsersCatFacts, setIsErrorFetchingUsersCatFacts] =
     useState(false);
 
-  useEffect(() => {
-    const fetchUsersCatFacts = async () => {
+    const fetchUsersCatFacts = async (signal) => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
       try {
-        const response = await usersCatApiInstance.get('/facts');
+        const response = await usersCatApiInstance.get('/facts', {
+          signal
+        });
 
         setUsersCatFacts(response.data);
         // Simulate a delay of 0.6 seconds
@@ -35,7 +37,16 @@ const UsersFactsProvider = ({ children }) => {
       setIsLoadingUsersFacts(false);
     };
 
-    fetchUsersCatFacts();
+  useEffect(() => {
+
+    const controller = new AbortController()
+  
+
+    fetchUsersCatFacts(controller.signal);
+
+    return () => {
+      controller.abort()
+    }
   }, []);
 
   return (
