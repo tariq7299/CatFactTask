@@ -29,7 +29,7 @@ const CreateFactsForm = () => {
   } = useForm();
 
   // This is my notificitions and alerts, and here iam using Context API to provide alerts for my whole app
-  const { alerts, addAlert } = useAlert();
+  const { addAlert } = useAlert();
 
   const navigate = useNavigate();
 
@@ -62,14 +62,7 @@ const CreateFactsForm = () => {
   
   return (
     <>
-      {/* This is my alerts and notificion ! doesn't matter where i would put this div as it with fixed position property */}
-      <div className="alerts-wrapper">
-        {alerts.map((alert, index) => (
-          <div key={alert.id} className="alerts-container">
-            <CatAlert index={index} alertId={alert.id} />
-          </div>
-        ))}
-      </div>
+      
 
       <form
         className="add-fact-form"

@@ -43,7 +43,7 @@ function AuthProvider({ children }) {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        addAlert('Unathorized access please log in first !!', 'danger');
+        addAlert('Unathorized access please log in first !!', 'error');
         return false;
       } else {
         // Handle other errors (e.g., network issues)
@@ -95,7 +95,7 @@ function AuthProvider({ children }) {
 
       if (response.status === 200 || response.status === 204) {
         console.log("response", response)
-        addAlert(response.data.message);
+        addAlert(response.data.message, 'success');
         localStorage.removeItem('userData');
         Cookies.remove('token');
         navigate('/login');

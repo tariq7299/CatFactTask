@@ -1,37 +1,19 @@
 // src/AlertContext.js
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { useLocation } from 'react-router-dom';
+import React, { createContext, useContext, useState} from 'react';
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AlertContext = createContext();
 
 const AlertProvider = ({ children }) => {
-  const [alerts, setAlerts] = useState([]);
-  const location = useLocation();
 
   const addAlert = (message, variant) => {
-    const id = uuidv4();
-    const timeoutId = setTimeout(() => {
-      removeAlert(id);
-    }, 2000);
-
-    setAlerts([...alerts, { id, message, variant, timeoutId }]);
-  };
-
-  const removeAlert = (idToRemove) => {
-    setAlerts((prevAlerts) =>
-      prevAlerts.filter((alert) => {
-        if (alert.id === idToRemove) {
-          clearTimeout(alert.timeoutId);
-          return false;
-        }
-        return true;
-      })
-    );
-  };
+    console.log("message", message, "variant", variant)
+    toast[variant](message)
+  }
 
   return (
-    <AlertContext.Provider value={{ alerts, addAlert, removeAlert }}>
+    <AlertContext.Provider value={{ addAlert }}>
       {children}
     </AlertContext.Provider>
   );

@@ -3,15 +3,12 @@ import { useAuth } from '../../hooks/AuthProvider';
 import './Login.scss';
 import ResponsiveCat from '../../components/ResponsiveCat/ResponsiveCat';
 import CatButton from '../../components/common/CatButton/CatButton';
-import CatAlert from '../../components/common/CatAlert/CatAlert';
-import { useAlert } from '../../hooks/AlertProvider';
 import { useForm } from 'react-hook-form';
 
 //  TASK #4 : Manage app state using Context API and CRUD operations
 //                     Use CRUD operatins
 //                     Implement Responsive design
 export default function Login() {
-  const { alerts, addAlert } = useAlert();
   const auth = useAuth();
   const { register, handleSubmit, errors } = useForm();
 
@@ -28,12 +25,7 @@ export default function Login() {
         </h1>
         <ResponsiveCat></ResponsiveCat>
       </div>
-      <div className="alerts-wrapper">
-        {alerts.map((alert, index) => (
-          <CatAlert key={alert.id} index={index} alertId={alert.id} />
-        ))}
-      </div>
-
+     
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form_control">
           <label htmlFor="user-username">Whisker-worthy Username</label>

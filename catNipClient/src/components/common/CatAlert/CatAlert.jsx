@@ -4,7 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import './CatAlert.scss';
 
 const CatAlert = ({ index, alertId }) => {
-  const { alerts, removeAlert } = useAlert();
+  const { removeAlert } = useAlert();
   const { message, variant } = alerts[index];
 
   return (

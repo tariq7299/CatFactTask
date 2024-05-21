@@ -12,12 +12,11 @@ const UsersFactsProvider = ({ children }) => {
   const [isErrorFetchingUsersCatFacts, setIsErrorFetchingUsersCatFacts] =
     useState(false);
 
-    const fetchUsersCatFacts = async (signal) => {
+    const fetchUsersCatFacts = async () => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
       try {
         const response = await usersCatApiInstance.get('/facts', {
-          signal
         });
 
         setUsersCatFacts(response.data);
@@ -39,14 +38,11 @@ const UsersFactsProvider = ({ children }) => {
 
   useEffect(() => {
 
-    const controller = new AbortController()
   
 
-    fetchUsersCatFacts(controller.signal);
+    fetchUsersCatFacts();
 
-    return () => {
-      controller.abort()
-    }
+  
   }, []);
 
   return (
