@@ -1,17 +1,18 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
+  const token = Cookies.get('token')
 
 // Create an instance with a base URL for your API
-export const apiInstance = axios.create({
-  baseURL: 'https://your-api.com/api',
-  timeout: 5000, // optional, sets the request timeout to 5 seconds
+export const usersCatApiInstance = axios.create({
+  baseURL: 'http://localhost:3000/api',
   headers: {
-    'Content-Type': 'application/json',
-    // Add any other headers you need
+    Authorization: `Bearer ${token}`,
   },
 });
 
-// Create another instance with a different base URL if needed
-export const anotherInstance = axios.create({
-  baseURL: 'https://another-api.com',
-  // Add any other configuration options here
-});
+// Create an instance with a base URL for your API
+export const internetCatApiInstance = axios.create({
+    baseURL: 'https://catfact.ninja/facts',
+  });
+

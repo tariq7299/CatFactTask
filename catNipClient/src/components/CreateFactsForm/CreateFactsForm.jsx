@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { usersCatApiInstance } from '../../helper/axiosInstances';
 import React, { useState, useMemo } from 'react';
 import { useAuth } from '../../hooks/AuthProvider';
 import './CreatFactsForm.scss';
@@ -15,15 +15,9 @@ import { useUsersFacts } from '../../hooks/UsersFactsProvider';
 // Use CRUD operatins
 // Implement Responsive design
 const CreateFactsForm = () => {
-  const { setUsersCatFacts, usersCatFacts } = useUsersFacts();
 
-  // This will get the token from Cookies and here im using Context API
-  const { getToken } = useAuth();
+  const { setUsersCatFacts } = useUsersFacts();
 
-  // Cache it for better performance
-  const token = useMemo(() => {
-    return getToken();
-  }, [getToken]);
 
   const {
     register,
@@ -42,19 +36,8 @@ const CreateFactsForm = () => {
   // Use CRUD operatins
   const handleSubmittingNewFact = async (data) => {
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/facts/create',
-        data,
-        {
-          // Iam sending my token in a header, for validation
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
 
-      console.log('usersCatFacts', usersCatFacts);
-      console.log('data', data);
+      const response = await usersCatApiInstance.post('/facts/create', data);
 
       // This means that the fact got added successfully
       if (response.status === 200 || response.status === 201) {
@@ -80,6 +63,7 @@ const CreateFactsForm = () => {
       }
     }
   };
+  
   return (
     <>
       {/* This is my alerts and notificion ! doesn't matter where i would put this div as it with fixed position property */}

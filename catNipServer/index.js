@@ -85,7 +85,7 @@ try{
 
   usersCatFacts.push(newFact)
 
-  res.status(200).json({ message: 'New fact created successfully'});
+  res.status(200).json({ message: 'New fact created successfully',  newFact: newFact});
 } catch (error) {
   res.status(500).json({ message: error.message });
 }

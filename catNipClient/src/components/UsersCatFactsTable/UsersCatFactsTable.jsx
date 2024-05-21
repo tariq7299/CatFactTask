@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
 import './UsersCatFactsTable.scss';
 import { ProgressBar } from 'react-loader-spinner';
-import { useState, useEffect } from 'react';
+import { usersCatApiInstance } from '../../helper/axiosInstances';
 import axios from 'axios';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useAlert } from '../../hooks/AlertProvider';
@@ -25,13 +25,9 @@ const UsersCatFactsTable = () => {
     isErrorFetchingUsersCatFacts,
   } = useUsersFacts();
 
-  const { getToken, getUserData } = useAuth();
+  const { getUserData } = useAuth();
 
   const { register, handleSubmit, reset } = useForm();
-
-  const token = useMemo(() => {
-    return getToken();
-  }, [getToken]);
 
   const username = useMemo(() => {
     return getUserData();
@@ -45,14 +41,8 @@ const UsersCatFactsTable = () => {
   // It will send DELETE request to server with the fact ID
   const handleDeletUserCatFact = async (factId) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:3000/api/facts/${factId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+
+      const response = await usersCatApiInstance.delete(`facts/${factId}`);
 
       if (response.status === 200 || response.status === 204) {
         addAlert('Cat Fact Deleted ❗️', 'warning');
@@ -89,6 +79,7 @@ const UsersCatFactsTable = () => {
   }
 
   const handleSubmittingUpdatedFact = async (data, factId) => {
+
     try {
       reset();
       // Extract the value of the textarea with the key corresponding to the factId
@@ -102,17 +93,7 @@ const UsersCatFactsTable = () => {
       // Prepare the data to be sent in the PUT request
       const requestData = { updatedCatFact };
 
-      // Make the PUT request to update the cat fact
-      const response = await axios.put(
-        `http://localhost:3000/api/facts/${factId}`,
-        requestData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await usersCatApiInstance.put(`/facts/${factId}`, requestData);
 
       if (response.status === 200 || response.status === 204) {
         // Here ima updating the cat facts without refetching them from server !

@@ -3,8 +3,8 @@ import DataTable from 'react-data-table-component';
 import './InternetCatFactsTable.scss';
 import { ProgressBar } from 'react-loader-spinner';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import CatButton from '../common/CatButton/CatButton';
+import { internetCatApiInstance } from '../../helper/axiosInstances';
 
 const InternetCatFactsTable = () => {
   // This for the actula facts fetched from the public API
@@ -29,9 +29,8 @@ const InternetCatFactsTable = () => {
         // TASK #1 : Fetch data from an API
         // Use Axios
         // Handle errors
-        const response = await axios.get(
-          `https://catfact.ninja/facts?page=${currentPage}&max_length=70`
-        );
+
+        const response = await internetCatApiInstance.get(`?page=${currentPage}&max_length=70`)
 
         // Simulate a delay of 0.6 seconds
         // This will make the UX much better

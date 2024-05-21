@@ -1,6 +1,6 @@
 // src/DataContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { usersCatApiInstance } from '../helper/axiosInstances';
 
 const UsersFactsContext = createContext();
 
@@ -16,7 +16,7 @@ const UsersFactsProvider = ({ children }) => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
       try {
-        const response = await axios.get('http://localhost:3000/api/facts');
+        const response = await usersCatApiInstance.get('/facts');
 
         setUsersCatFacts(response.data);
         // Simulate a delay of 0.6 seconds
