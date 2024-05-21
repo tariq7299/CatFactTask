@@ -11,39 +11,46 @@ const UsersFactsProvider = ({ children }) => {
   const [isLoadingUsersFacts, setIsLoadingUsersFacts] = useState(false);
   const [isErrorFetchingUsersCatFacts, setIsErrorFetchingUsersCatFacts] =
     useState(false);
+    
 
-    const fetchUsersCatFacts = async () => {
+    const fetchUsersCatFacts = async (signal) => {
       setIsErrorFetchingUsersCatFacts(false);
       setIsLoadingUsersFacts(true);
+      console.log("signal", signal)
+    
       try {
         const response = await usersCatApiInstance.get('/facts', {
+          signal,
         });
 
+    
+        if (signal.aborted) return;
+    
         setUsersCatFacts(response.data);
-        // Simulate a delay of 0.6 seconds
-        setIsLoadingUsersFacts(true);
-
-        const loadingTimer = setTimeout(() => {
-          setIsLoadingUsersFacts(false);
-        }, 600);
-
-        return () => clearTimeout(loadingTimer);
+        setIsLoadingUsersFacts(false);
       } catch (error) {
-        setIsErrorFetchingUsersCatFacts(true);
-        console.error('Error fetching data:', error);
+        if (!signal.aborted) {
+          setIsErrorFetchingUsersCatFacts(true);
+          console.error('Error fetching data:', error);
+        }
+      } finally {
+        if (!signal.aborted) {
+          setIsLoadingUsersFacts(false);
+        }
       }
-
-      setIsLoadingUsersFacts(false);
     };
-
-  useEffect(() => {
-
-  
-
-    fetchUsersCatFacts();
-
-  
-  }, []);
+    
+    useEffect(() => {
+      const controller = new AbortController();
+    
+      console.log("controller")
+      fetchUsersCatFacts(controller.signal);
+    
+      return () => {
+        controller.abort();
+      };
+      
+    }, []);
 
   return (
     <UsersFactsContext.Provider
