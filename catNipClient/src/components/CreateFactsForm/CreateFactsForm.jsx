@@ -8,10 +8,15 @@ import { useAlert } from '../../hooks/AlertProvider';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+// Importing usersFacts context
+import { useUsersFacts } from '../../hooks/UsersFactsProvider';
+
 // TASK #4 : Manage app state using Context API and CRUD operations
 // Use CRUD operatins
 // Implement Responsive design
-const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
+const CreateFactsForm = () => {
+  const { setUsersCatFacts, usersCatFacts } = useUsersFacts();
+
   // This will get the token from Cookies and here im using Context API
   const { getToken } = useAuth();
 
@@ -34,9 +39,8 @@ const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
   const navigate = useNavigate();
 
   // TASK #4 : Manage app state using Context API and CRUD operations
-// Use CRUD operatins
+  // Use CRUD operatins
   const handleSubmittingNewFact = async (data) => {
-
     try {
       const response = await axios.post(
         'http://localhost:3000/api/facts/create',
@@ -49,11 +53,17 @@ const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
         }
       );
 
+      console.log('usersCatFacts', usersCatFacts);
+      console.log('data', data);
+
       // This means that the fact got added successfully
       if (response.status === 200 || response.status === 201) {
+        // Update the users cat facts state to be reflected on screen
+        const newFact = response.data.newFact;
+        setUsersCatFacts([...usersCatFacts, newFact]);
+
         addAlert('Cat Fact Added 👍', 'success');
         reset();
-        setNewFactAdded(!newFactAdded);
       } else {
         throw new Error();
       }
@@ -72,8 +82,8 @@ const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
   };
   return (
     <>
-    {/* This is my alerts and notificion ! doesn't matter where i would put this div as it with fixed position property */}
-     <div className="alerts-wrapper">
+      {/* This is my alerts and notificion ! doesn't matter where i would put this div as it with fixed position property */}
+      <div className="alerts-wrapper">
         {alerts.map((alert, index) => (
           <div key={alert.id} className="alerts-container">
             <CatAlert index={index} alertId={alert.id} />
@@ -81,28 +91,32 @@ const CreateFactsForm = ({ newFactAdded, setNewFactAdded }) => {
         ))}
       </div>
 
-    <form className="add-fact-form" onSubmit={handleSubmit(handleSubmittingNewFact)}>
-      
-      
-      <div className="add-fact-form-elements-container">
-      {errors?.newCatFact && <span className="inputs-erros-message ">{errors.newCatFact.message}</span>}
+      <form
+        className="add-fact-form"
+        onSubmit={handleSubmit(handleSubmittingNewFact)}
+      >
+        <div className="add-fact-form-elements-container">
+          {errors?.newCatFact && (
+            <span className="inputs-erros-message ">
+              {errors.newCatFact.message}
+            </span>
+          )}
 
-        <textarea
-          type="text"
-          id="newCatFact"
-          name="newCatFact"
-          placeholder="cats like marshmallow..."
-          {...register('newCatFact', { required: "You can't provide an empty cat fact !" })}
-          
-        />
-        {/* Show any unexcpectd */}
-      
-        <CatButton text="Add Fact"></CatButton>
-      </div>
-      
-    </form>
+          <textarea
+            type="text"
+            id="newCatFact"
+            name="newCatFact"
+            placeholder="cats like marshmallow..."
+            {...register('newCatFact', {
+              required: "You can't provide an empty cat fact !",
+            })}
+          />
+          {/* Show any unexcpectd */}
+
+          <CatButton text="Add Fact"></CatButton>
+        </div>
+      </form>
     </>
-   
   );
 };
 export default CreateFactsForm;

@@ -1,4 +1,4 @@
-import { useContext, createContext} from 'react';
+import { useContext, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAlert } from './AlertProvider';

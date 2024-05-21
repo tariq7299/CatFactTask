@@ -13,8 +13,18 @@ import PencilIcon from '../common/Icons/PencilIcon';
 import TrashIcon from '../common/Icons/TrashIcon';
 import SaveIcon from '../common/Icons/SaveIcon';
 
+// Importing usersFacts context
+import { useUsersFacts } from '../../hooks/UsersFactsProvider';
+
 // THis the second table where it will show the cat facts users added to the site, so it is not from a public API and instead it is from my server and DB
-const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
+const UsersCatFactsTable = () => {
+  const {
+    setUsersCatFacts,
+    usersCatFacts,
+    isLoadingUsersFacts,
+    isErrorFetchingUsersCatFacts,
+  } = useUsersFacts();
+
   const { getToken, getUserData } = useAuth();
 
   const { register, handleSubmit, reset } = useForm();
@@ -31,44 +41,10 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
 
   const navigate = useNavigate();
 
-  const [usersCatFacts, setUsersCatFacts] = useState([]);
-
-  const [isLoadingUsersFacts, setIsLoadingUsersFacts] = useState(false);
-  const [isErrorFetchingUsersCatFacts, setIsErrorFetchingUsersCatFacts] =
-    useState(false);
-
-  useEffect(() => {
-    const fetchUsersCatFacts = async () => {
-      setIsErrorFetchingUsersCatFacts(false);
-      setIsLoadingUsersFacts(true);
-      try {
-        const response = await axios.get('http://localhost:3000/api/facts');
-
-        setUsersCatFacts(response.data);
-        // Simulate a delay of 0.6 seconds
-        setIsLoadingUsersFacts(true);
-
-        const loadingTimer = setTimeout(() => {
-          setIsLoadingUsersFacts(false);
-        }, 600);
-
-        return () => clearTimeout(loadingTimer);
-      } catch (error) {
-        setIsErrorFetchingUsersCatFacts(true);
-        console.error('Error fetching data:', error);
-      }
-
-      setIsLoadingUsersFacts(false);
-    };
-
-    fetchUsersCatFacts();
-  }, [newFactAdded]);
-
   // THis funcion will handle when users click on the delete button to try to delete a fact !
   // It will send DELETE request to server with the fact ID
   const handleDeletUserCatFact = async (factId) => {
     try {
-
       const response = await axios.delete(
         `http://localhost:3000/api/facts/${factId}`,
         {
@@ -81,8 +57,13 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       if (response.status === 200 || response.status === 204) {
         addAlert('Cat Fact Deleted ❗️', 'warning');
 
-        setUsersCatFacts(usersCatFacts.filter((fact) => fact.id !== factId));
-        setNewFactAdded(!newFactAdded);
+        // Ask why only setting call back works ? like if you instead removed the call back it won't update the UI instantly ? and we have to refresh the page!!!
+        setUsersCatFacts((prevFacts) =>
+          prevFacts.filter((fact) => fact.factId !== factId)
+        );
+
+        // THis won't work
+        // setUsersCatFacts(usersCatFacts.filter((fact) => fact.id !== factId));
       } else {
         throw new Error();
       }
@@ -138,8 +119,24 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
       );
 
       if (response.status === 200 || response.status === 204) {
+        // Here ima updating the cat facts without refetching them from server !
+
+        setUsersCatFacts(
+          usersCatFacts.map((userCatFact) => {
+            if (userCatFact.factId === factId) {
+              // Return the updated object with the new catFact
+              return {
+                ...userCatFact,
+                catFact: updatedCatFact,
+                editMode: false,
+              };
+            }
+            // Return the unchanged object if factId does not match
+            return userCatFact;
+          })
+        );
+
         addAlert('Cat Fact updated 👍', 'info');
-        setNewFactAdded(!newFactAdded);
       } else {
         // Throw an error if the response status is unexpected
         throw new Error();
@@ -219,7 +216,9 @@ const UsersCatFactsTable = ({ newFactAdded, setNewFactAdded }) => {
               </button>{' '}
               {row.editMode && (
                 <button
-                  onClick={handleSubmit((data) => handleSubmittingUpdatedFact(data, row.factId))}
+                  onClick={handleSubmit((data) =>
+                    handleSubmittingUpdatedFact(data, row.factId)
+                  )}
                 >
                   <SaveIcon />
                 </button>

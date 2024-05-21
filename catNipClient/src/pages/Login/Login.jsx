@@ -40,12 +40,16 @@ export default function Login() {
           <input
             type="text"
             id="user-username"
-          name="username"
+            name="username"
             placeholder="catman99..."
             {...register('username', { required: 'Username is required' })}
             autoComplete="current-username"
           />
-          {errors?.username && <span className="inputs-erros-message ">{errors.username.message}</span>}
+          {errors?.username && (
+            <span className="inputs-erros-message ">
+              {errors.username.message}
+            </span>
+          )}
         </div>
         <div className="form_control">
           <label htmlFor="password">Pawsitive Passcode🔒</label>
@@ -57,7 +61,11 @@ export default function Login() {
             {...register('password', { required: 'Password is required' })}
             autoComplete="current-password"
           />
-          {errors?.password && <span className="inputs-erros-message ">{errors.password.message}</span>}
+          {errors?.password && (
+            <span className="inputs-erros-message ">
+              {errors.password.message}
+            </span>
+          )}
         </div>
         <div className="get-started-button-wrapper">
           <div className="cat-button get-started-button">

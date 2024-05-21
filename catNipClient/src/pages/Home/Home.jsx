@@ -7,10 +7,12 @@ import { useAuth } from '../../hooks/AuthProvider';
 import './Home.scss';
 import CatButtonLogOut from '../../components/common/CatButtonLogOut/CatButtonLogOut';
 
+// Importing Users Facts Provider
+import UsersFactsProvider from '../../hooks/UsersFactsProvider';
+
 function Home() {
   const { logOut, getUserData } = useAuth();
   const username = getUserData();
-  const [newFactAdded, setNewFactAdded] = useState(false);
 
   function handleLogout() {
     logOut();
@@ -18,34 +20,31 @@ function Home() {
   }
 
   return (
-      <div className='home-page-parent-container'>
-        <h1 className="greeting-header">
-          Hello 👋 😸 <span>{username}</span> !
-        </h1>
+    <div className="home-page-parent-container">
+      <h1 className="greeting-header">
+        Hello 👋 😸 <span>{username}</span> !
+      </h1>
 
+      {/* This will provide the usersFacts to UsersCatFactsTable and CreateFactsForm */}
+      <UsersFactsProvider>
         <div className="tables-container">
           <InternetCatFactsTable />
-          <UsersCatFactsTable
-            setNewFactAdded={setNewFactAdded}
-            newFactAdded={newFactAdded}
-          />
+          <UsersCatFactsTable />
         </div>
 
         <div className="add-new-fact-container">
           <h1>You can also add your own facts ! Try it 👇</h1>
-          <CreateFactsForm
-            newFactAdded={newFactAdded}
-            setNewFactAdded={setNewFactAdded}
-          ></CreateFactsForm>
+          <CreateFactsForm></CreateFactsForm>
         </div>
+      </UsersFactsProvider>
 
-        <div className="footer">
-          <p>Proudly made by TQ</p>
-          <CatButtonLogOut text="Exit 😿" handleOnClick={handleLogout}>
-            GoodBye
-          </CatButtonLogOut>
-        </div>
+      <div className="footer">
+        <p>Proudly made by TQ</p>
+        <CatButtonLogOut text="Exit 😿" handleOnClick={handleLogout}>
+          GoodBye
+        </CatButtonLogOut>
       </div>
+    </div>
   );
 }
 

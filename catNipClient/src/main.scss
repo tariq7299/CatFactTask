@@ -11,7 +11,8 @@ body {
   background-color: $color-black;
   color: $secondary-color;
   font-family: 'Amatic SC', sans-serif;
-  cursor: url('catPointer.png'), url('catPointerFallback1.png'), url('catPointerFallback2.png'), auto;
+  cursor: url('catPointer.png'), url('catPointerFallback1.png'),
+    url('catPointerFallback2.png'), auto;
 }
 
 .custom-font {

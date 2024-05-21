@@ -20,7 +20,7 @@ const InternetCatFactsTable = () => {
   const [isErrorFetchingInternetCatFacts, setIsErrorFetchingInternetCatFacts] =
     useState(false);
 
-    // Fetching facts from the public api
+  // Fetching facts from the public api
   useEffect(() => {
     const fetchInternetCatFacts = async () => {
       setIsErrorFetchingInternetCatFacts(false);
@@ -41,7 +41,6 @@ const InternetCatFactsTable = () => {
         }, 600);
 
         return () => clearTimeout(loadingTimer);
-
       } catch (error) {
         setIsErrorFetchingInternetCatFacts(true);
         console.error('Error fetching data:', error);
