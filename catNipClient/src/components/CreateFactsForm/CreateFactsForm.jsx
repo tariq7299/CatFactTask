@@ -60,7 +60,7 @@ const CreateFactsForm = () => {
       if (response.status === 200 || response.status === 201) {
         // Update the users cat facts state to be reflected on screen
         const newFact = response.data.newFact;
-        setUsersCatFacts([...usersCatFacts, newFact]);
+        setUsersCatFacts(prev => [...prev, newFact]);
 
         addAlert('Cat Fact Added 👍', 'success');
         reset();

@@ -57,13 +57,9 @@ const UsersCatFactsTable = () => {
       if (response.status === 200 || response.status === 204) {
         addAlert('Cat Fact Deleted ❗️', 'warning');
 
-        // Ask why only setting call back works ? like if you instead removed the call back it won't update the UI instantly ? and we have to refresh the page!!!
-        setUsersCatFacts((prevFacts) =>
-          prevFacts.filter((fact) => fact.factId !== factId)
-        );
+        setUsersCatFacts([...usersCatFacts.filter((fact) => fact?.factId !== factId)]);
 
-        // THis won't work
-        // setUsersCatFacts(usersCatFacts.filter((fact) => fact.id !== factId));
+
       } else {
         throw new Error();
       }
