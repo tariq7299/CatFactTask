@@ -35,6 +35,7 @@ const CreateFactsForm = () => {
   // TASK #4 : Manage app state using Context API and CRUD operations
   // Use CRUD operatins
   const handleSubmittingNewFact = async (data) => {
+    
     try {
 
       const response = await usersCatApiInstance.post('/facts/create', data);
@@ -51,16 +52,7 @@ const CreateFactsForm = () => {
         throw new Error();
       }
     } catch (error) {
-      // THis would mean that the user is not logged in !!, so i will direct him to login page and show an alert also
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page or handle unauthorized access
-        addAlert('Unathorized access please log in first !!', 'danger');
-        navigate('/login');
-      } else {
-        // Handle other errors (e.g., show an error message)
-        console.error('Something bad happened! Please contact support.');
-        addAlert('Something bad happened ! Please contact support !', 'danger');
-      }
+      errorHandler(error, addAlert)
     }
   };
   

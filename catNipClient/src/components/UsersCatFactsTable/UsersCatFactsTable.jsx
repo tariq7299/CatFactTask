@@ -54,15 +54,7 @@ const UsersCatFactsTable = () => {
         throw new Error();
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page or handle unauthorized access
-        console.error('User UnAuthorized ... redirecting to login page');
-        navigate('/login');
-      } else {
-        // Handle other errors (e.g., show an error message)
-        console.error('Something bad happened! Please contact support.');
-        addAlert('Something bad happened ! Please contact support !', 'danger');
-      }
+      errorHandler(error, addAlert)
     }
   };
 
@@ -119,15 +111,7 @@ const UsersCatFactsTable = () => {
         throw new Error();
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Redirect to login page or handle unauthorized access
-        console.error('User Unauthorized ... redirecting to login page');
-        navigate('/login');
-      } else {
-        // Handle other errors (e.g., show an error message)
-        console.error('Something bad happened! Please contact support.');
-        addAlert('Something bad happened! Please contact support!', 'danger');
-      }
+      errorHandler(error, addAlert)
     }
   };
 
