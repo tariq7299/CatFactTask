@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAlert } from './AlertProvider';
 import axios from 'axios';
+import { usersCatApiInstance } from '../helper/axiosInstances';
+import errorHandler from '../helper/helperFunctions';
 
 const AuthContext = createContext();
 
@@ -82,10 +84,28 @@ function AuthProvider({ children }) {
   }
 
   // THis will handle when user presses on "Exit" button
-  function logOut() {
-    localStorage.removeItem('userData');
-    Cookies.remove('token');
-    navigate('/login');
+  async function logOut() {
+    try {
+      // TASK #1: Fetch data from an API
+      // Use Axios
+      // Handle errors
+      const response = await usersCatApiInstance.post(
+        '/logout'
+      );
+
+      if (response.status === 200 || response.status === 204) {
+        console.log("response", response)
+        addAlert(response.data.message);
+        localStorage.removeItem('userData');
+        Cookies.remove('token');
+        navigate('/login');
+      }
+
+    } catch (error) {
+      errorHandler(error, addAlert, navigate)
+    }
+
+ 
   }
 
   return (

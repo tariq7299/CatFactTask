@@ -1,7 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-
-const errorHandler = (error, addAlert) => {
-  const navigate = useNavigate();
+const errorHandler = (error, addAlert, navigate) => {
 
   if (error.response && error.response.status === 401) {
     // Redirect to login page or handle unauthorized access

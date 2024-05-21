@@ -5,8 +5,10 @@ import './CreatFactsForm.scss';
 import CatButton from '../common/CatButton/CatButton';
 import CatAlert from '../common/CatAlert/CatAlert';
 import { useAlert } from '../../hooks/AlertProvider';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
+import errorHandler from '../../helper/helperFunctions';
 
 // Importing usersFacts context
 import { useUsersFacts } from '../../hooks/UsersFactsProvider';
@@ -29,8 +31,8 @@ const CreateFactsForm = () => {
   // This is my notificitions and alerts, and here iam using Context API to provide alerts for my whole app
   const { alerts, addAlert } = useAlert();
 
-  // This from React ROuter and it is used to change routes/pages
   const navigate = useNavigate();
+
 
   // TASK #4 : Manage app state using Context API and CRUD operations
   // Use CRUD operatins
@@ -39,6 +41,8 @@ const CreateFactsForm = () => {
     try {
 
       const response = await usersCatApiInstance.post('/facts/create', data);
+
+
 
       // This means that the fact got added successfully
       if (response.status === 200 || response.status === 201) {
@@ -52,7 +56,7 @@ const CreateFactsForm = () => {
         throw new Error();
       }
     } catch (error) {
-      errorHandler(error, addAlert)
+      errorHandler(error, addAlert, navigate)
     }
   };
   

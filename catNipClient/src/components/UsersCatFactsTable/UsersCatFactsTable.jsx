@@ -13,6 +13,8 @@ import PencilIcon from '../common/Icons/PencilIcon';
 import TrashIcon from '../common/Icons/TrashIcon';
 import SaveIcon from '../common/Icons/SaveIcon';
 
+import errorHandler from '../../helper/helperFunctions';
+
 // Importing usersFacts context
 import { useUsersFacts } from '../../hooks/UsersFactsProvider';
 
@@ -54,7 +56,7 @@ const UsersCatFactsTable = () => {
         throw new Error();
       }
     } catch (error) {
-      errorHandler(error, addAlert)
+      errorHandler(error, addAlert, navigate)
     }
   };
 
@@ -111,7 +113,7 @@ const UsersCatFactsTable = () => {
         throw new Error();
       }
     } catch (error) {
-      errorHandler(error, addAlert)
+      errorHandler(error, addAlert, navigate)
     }
   };
 

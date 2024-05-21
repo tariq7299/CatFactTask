@@ -7,7 +7,16 @@
         - Add error handling to updating new fact
         - Add error handling to deleting new fact  
 
-    - Remove the token from cookies when user is unAuthenticated() 
+    - Remove the token from cookies when user is unAuthenticated()
+    - And fix unauthorized CRUD operations
+    - Add error handling to logout and login functions
+
+        - Find a way to handle incorrect username or password
+            
+
+
+    - Replace the login and logout requests with axios instances
+
     - Use http-only cookies  
     - Remove the getToken() function from authProvider.jsx hook
     - Chnage name of axiosInstances file to something better

@@ -6,6 +6,7 @@ const PORT = 3000;
 
 // My mini database
 const tokenStorage = {};
+
 const users = [
   { id: 1, username: 'hassan', password: '1122' },
   { id: 2, username: 'tariq', password: '1122' },
@@ -20,6 +21,8 @@ const usersCatFacts = [
   {factId: 6, owner: 'Hassan', catFact: 'I am tired of comping up with those stupid facts'},
   {factId: 7, owner: 'Tariq', catFact: 'please like my website 🐸'},
 ]
+
+const blacklist = [];
 
 const secretKey = 'CAT-FACTS-VERY-SECRET';
 app.use(express.json());
@@ -124,11 +127,11 @@ app.put('/api/facts/:factId', authenticateToken,  (req, res) => {
 function authenticateToken(req, res, next) {
 
   const token = req.headers.authorization?.split(' ')[1];
-  
 
   if (!token || !tokenStorage[token]) {
     return res.status(401).json({ message: 'Invalid token' });
-  }
+  } 
+
   const userId = tokenStorage[token];
   const user = users.find(u => u.id === userId);
   if (!user) {
@@ -146,5 +149,16 @@ function generateToken(userId) {
     .digest('hex');
   return hash;
 }
+
+app.post('/api/logout', authenticateToken, (req, res) => {
+
+  const token = req.headers.authorization?.split(' ')[1];
+
+  delete tokenStorage[token];
+
+  console.log()
+
+  res.status(200).json({ message: 'You have been loged out successfully !' });
+});
 
 app.listen(PORT, () => {});
